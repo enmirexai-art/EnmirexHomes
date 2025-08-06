@@ -95,7 +95,7 @@ export default function LeadForm() {
         <Card className="shadow-xl">
           <CardContent className="p-8 lg:p-12">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Get Your Free Cash Offer</h2>
+              <h2 className="text-3xl font-bold text-primary mb-4">Get Your Free Cash Offer</h2>
               <p className="text-lg text-gray-600">
                 Fill out the form below and we'll contact you within 24 hours with a fair cash offer for your property.
               </p>
@@ -247,7 +247,7 @@ export default function LeadForm() {
               </div>
 
               <div className="border-t pt-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+                <h3 className="text-lg font-semibold text-primary mb-4">Contact Information</h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="fullName">Full Name *</Label>
@@ -299,7 +299,7 @@ export default function LeadForm() {
                 <Button 
                   type="submit" 
                   disabled={submitMutation.isPending}
-                  className="bg-primary text-white px-12 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 w-full md:w-auto"
+                  className="bg-secondary text-primary px-12 py-4 rounded-lg font-bold text-lg hover:bg-secondary/90 w-full md:w-auto"
                 >
                   {submitMutation.isPending ? "Submitting..." : "Get My Free Cash Offer"}
                 </Button>

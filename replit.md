@@ -6,6 +6,26 @@ This is a real estate lead generation website for "Enmirex Homes," a cash house 
 
 Preferred communication style: Simple, everyday language.
 
+# Recent Changes (August 2025)
+
+## Brand Integration and Theme Update
+- **Date**: August 6, 2025
+- **Change**: Updated entire website to use Enmirex Homes navy blue and gold branding
+- **Details**: 
+  - Integrated Enmirex Homes logo (navy background with gold logo)
+  - Updated color scheme: Primary (navy blue: hsl(218, 100%, 12%)), Secondary (gold: hsl(45, 100%, 50%))
+  - Updated all components (header, hero, process, form, footer) to use new color theme
+  - Applied professional real estate aesthetic matching brand guidelines
+
+## Google Sheets Integration
+- **Date**: August 6, 2025
+- **Change**: Successfully integrated Google Sheets API for lead capture
+- **Details**:
+  - Connected to specific Google Spreadsheet (ID: 1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs)
+  - Configured Google service account credentials via Replit Secrets
+  - All form submissions automatically save to spreadsheet with comprehensive lead data
+  - Tested and verified working integration
+
 # System Architecture
 
 ## Frontend Architecture

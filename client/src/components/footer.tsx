@@ -14,7 +14,7 @@ export default function Footer() {
       <section className="py-20 gradient-primary text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Sell Your House Fast?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Get your fair cash offer today. No repairs, no fees, no hassle. 
             Join hundreds of satisfied homeowners who chose the fast, easy way to sell.
           </p>
@@ -22,15 +22,15 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
             <button 
               onClick={() => scrollToSection('get-offer')}
-              className="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition-colors"
+              className="bg-secondary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary/90 transition-colors"
             >
               Get My Cash Offer Now
             </button>
             <div className="text-center">
-              <div className="text-sm text-blue-200 mb-1">Or call us directly:</div>
+              <div className="text-sm text-white/70 mb-1">Or call us directly:</div>
               <a 
                 href="tel:(555) 123-4567" 
-                className="text-2xl font-bold hover:text-yellow-300 transition-colors flex items-center gap-2 justify-center"
+                className="text-2xl font-bold text-secondary hover:text-secondary/80 transition-colors flex items-center gap-2 justify-center"
               >
                 <Phone className="w-6 h-6" />
                 (555) 123-4567
@@ -38,7 +38,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center space-x-8 text-sm text-blue-100">
+          <div className="flex justify-center items-center space-x-8 text-sm text-white/80">
             <div>✓ 24-Hour Response</div>
             <div>✓ No Obligation</div>
             <div>✓ Fair Cash Offers</div>
@@ -47,11 +47,11 @@ export default function Footer() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-primary text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <div className="text-2xl font-bold mb-4">Enmirex Homes</div>
+              <div className="text-2xl font-bold mb-4 text-secondary">Enmirex Homes</div>
               <p className="text-gray-300 mb-4">
                 Professional real estate investors helping homeowners sell their houses fast for cash. 
                 No repairs, no fees, no hassle.

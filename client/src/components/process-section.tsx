@@ -35,7 +35,7 @@ export default function ProcessSection() {
       number: "4",
       title: "Close & Get Paid",
       description: "Accept our offer and we'll handle the paperwork. Close on your timeline and get cash in your hands fast.",
-      bgColor: "bg-green-600",
+      bgColor: "bg-secondary",
       showArrow: false,
     },
   ];
@@ -44,7 +44,7 @@ export default function ProcessSection() {
     <section id="how-it-works" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">How It Works - Simple 4 Steps</h2>
+          <h2 className="text-4xl font-bold text-primary mb-4">How It Works - Simple 4 Steps</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Our proven wholesale process makes selling your house fast and easy. 
             From initial contact to closing, we handle everything.
@@ -56,7 +56,7 @@ export default function ProcessSection() {
             <div key={step.number} className="text-center group">
               <div className="relative mb-6">
                 <div className={`w-20 h-20 ${step.bgColor} rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform`}>
-                  <span className="text-2xl font-bold text-white">{step.number}</span>
+                  <span className={`text-2xl font-bold ${step.bgColor === 'bg-secondary' ? 'text-primary' : 'text-white'}`}>{step.number}</span>
                 </div>
                 {step.showArrow && (
                   <div className="absolute -right-4 top-8 hidden lg:block">
@@ -64,7 +64,7 @@ export default function ProcessSection() {
                   </div>
                 )}
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
+              <h3 className="text-xl font-semibold text-primary mb-3">{step.title}</h3>
               <p className="text-gray-600">{step.description}</p>
             </div>
           ))}

@@ -16,23 +16,23 @@ export default function HeroSection() {
           <div>
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Sell Your House 
-              <span className="text-yellow-300">Fast for Cash</span>
+              <span className="text-secondary text-shadow-gold">Fast for Cash</span>
             </h1>
-            <p className="text-xl mb-8 text-blue-100">
+            <p className="text-xl mb-8 text-white/90">
               Get a fair cash offer in 24 hours. No repairs, no fees, no hassle. 
               We buy houses in any condition throughout your area.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button 
                 onClick={() => scrollToSection('get-offer')}
-                className="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition-colors"
+                className="bg-secondary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary/90 transition-colors"
               >
                 Get My Cash Offer Now
               </Button>
               <Button 
                 variant="outline"
                 asChild
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition-colors"
+                className="border-2 border-secondary text-secondary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary hover:text-primary transition-colors"
               >
                 <a href="tel:(555) 123-4567">
                   <Phone className="w-5 h-5 mr-2" />
@@ -42,15 +42,15 @@ export default function HeroSection() {
             </div>
             <div className="flex flex-wrap items-center gap-6 text-sm">
               <div className="flex items-center">
-                <Check className="w-5 h-5 mr-2 text-green-400" />
+                <Check className="w-5 h-5 mr-2 text-secondary" />
                 No Repairs Needed
               </div>
               <div className="flex items-center">
-                <Check className="w-5 h-5 mr-2 text-green-400" />
+                <Check className="w-5 h-5 mr-2 text-secondary" />
                 No Agent Fees
               </div>
               <div className="flex items-center">
-                <Check className="w-5 h-5 mr-2 text-green-400" />
+                <Check className="w-5 h-5 mr-2 text-secondary" />
                 Close Fast
               </div>
             </div>
