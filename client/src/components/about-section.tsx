@@ -24,11 +24,12 @@ export default function AboutSection() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Why Choose Enmirex Homes?</h2>
+            <h2 className="text-4xl font-bold text-primary mb-6">Why Choose Enmirex Homes?</h2>
             <p className="text-lg text-gray-600 mb-8">
-              We're experienced real estate professionals who specialize in buying houses quickly for cash. 
+              Enmirex Homes is a trusted real estate company specializing in fast, cash home purchases. 
               With over 10 years in the business, we've helped hundreds of homeowners sell their properties 
-              without the hassle of traditional real estate transactions.
+              without the hassle of traditional real estate transactions. When you work with Enmirex Homes, 
+              you're working with professionals who understand your needs.
             </p>
             
             <div className="space-y-6">
@@ -38,7 +39,7 @@ export default function AboutSection() {
                     <feature.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-semibold text-primary mb-2">{feature.title}</h3>
                     <p className="text-gray-600">{feature.description}</p>
                   </div>
                 </div>

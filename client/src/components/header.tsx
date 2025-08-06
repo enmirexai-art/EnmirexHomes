@@ -13,12 +13,13 @@ export default function Header() {
   return (
     <header className="bg-primary shadow-lg sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-4">
           <img 
             src={logoPath} 
             alt="Enmirex Homes Logo" 
-            className="h-12 w-auto"
+            className="h-16 w-auto"
           />
+          <div className="text-2xl font-bold text-secondary">Enmirex Homes</div>
         </div>
         <nav className="hidden md:flex space-x-8">
           <button 
@@ -56,7 +57,7 @@ export default function Header() {
           </a>
           <Button 
             onClick={() => scrollToSection('get-offer')}
-            className="bg-secondary text-primary hover:bg-secondary/90 font-bold"
+            className="bg-white text-primary hover:bg-gray-100 font-bold shadow-md"
           >
             Get Cash Offer
           </Button>

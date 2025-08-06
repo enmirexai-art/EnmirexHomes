@@ -299,7 +299,7 @@ export default function LeadForm() {
                 <Button 
                   type="submit" 
                   disabled={submitMutation.isPending}
-                  className="bg-secondary text-primary px-12 py-4 rounded-lg font-bold text-lg hover:bg-secondary/90 w-full md:w-auto"
+                  className="bg-primary text-white px-12 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 w-full md:w-auto shadow-lg border-2 border-secondary"
                 >
                   {submitMutation.isPending ? "Submitting..." : "Get My Free Cash Offer"}
                 </Button>

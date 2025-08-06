@@ -27,7 +27,7 @@ export default function TestimonialsSection() {
   ];
 
   const StarRating = ({ rating }: { rating: number }) => (
-    <div className="flex text-yellow-400 mb-4">
+    <div className="flex text-secondary mb-4">
       {Array.from({ length: rating }, (_, i) => (
         <Star key={i} className="w-5 h-5 fill-current" />
       ))}
@@ -38,7 +38,7 @@ export default function TestimonialsSection() {
     <section id="testimonials" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+          <h2 className="text-4xl font-bold text-primary mb-4">What Our Clients Say About Enmirex Homes</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Don't just take our word for it. Here's what homeowners have to say about their experience with Enmirex Homes.
           </p>
@@ -52,7 +52,7 @@ export default function TestimonialsSection() {
                 <p className="text-gray-600 mb-4 italic">
                   "{testimonial.content}"
                 </p>
-                <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                <div className="font-semibold text-primary">{testimonial.name}</div>
                 <div className="text-sm text-gray-500">{testimonial.subtitle}</div>
               </CardContent>
             </Card>

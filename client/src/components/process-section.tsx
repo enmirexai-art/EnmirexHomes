@@ -44,10 +44,10 @@ export default function ProcessSection() {
     <section id="how-it-works" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">How It Works - Simple 4 Steps</h2>
+          <h2 className="text-4xl font-bold text-primary mb-4">How Enmirex Homes Works - Simple 4 Steps</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our proven wholesale process makes selling your house fast and easy. 
-            From initial contact to closing, we handle everything.
+            Our proven process makes selling your house fast and easy. 
+            From initial contact to closing, Enmirex Homes handles everything.
           </p>
         </div>
         
@@ -73,7 +73,7 @@ export default function ProcessSection() {
         <div className="text-center mt-12">
           <Button 
             onClick={() => scrollToSection('get-offer')}
-            className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90"
+            className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 shadow-lg border-2 border-secondary"
           >
             Start Your Cash Offer Now
           </Button>

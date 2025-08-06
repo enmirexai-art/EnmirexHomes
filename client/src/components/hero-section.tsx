@@ -18,21 +18,24 @@ export default function HeroSection() {
               Sell Your House 
               <span className="text-secondary text-shadow-gold">Fast for Cash</span>
             </h1>
-            <p className="text-xl mb-8 text-white/90">
+            <p className="text-xl mb-4 text-white/90">
               Get a fair cash offer in 24 hours. No repairs, no fees, no hassle. 
               We buy houses in any condition throughout your area.
+            </p>
+            <p className="text-lg mb-8 text-secondary font-semibold">
+              — Enmirex Homes: Your Trusted Cash House Buyer
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button 
                 onClick={() => scrollToSection('get-offer')}
-                className="bg-secondary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary/90 transition-colors"
+                className="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
               >
                 Get My Cash Offer Now
               </Button>
               <Button 
                 variant="outline"
                 asChild
-                className="border-2 border-secondary text-secondary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary hover:text-primary transition-colors"
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition-colors"
               >
                 <a href="tel:(555) 123-4567">
                   <Phone className="w-5 h-5 mr-2" />

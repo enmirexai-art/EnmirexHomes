@@ -22,7 +22,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
             <button 
               onClick={() => scrollToSection('get-offer')}
-              className="bg-secondary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary/90 transition-colors"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
             >
               Get My Cash Offer Now
             </button>
