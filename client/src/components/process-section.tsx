@@ -41,28 +41,28 @@ export default function ProcessSection() {
   ];
 
   return (
-    <section id="how-it-works" className="py-20 bg-white">
+    <section id="how-it-works" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">How Enmirex Homes Works - Simple 4 Steps</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-3 sm:mb-4">How Enmirex Homes Works - Simple 4 Steps</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
             Our proven process makes selling your home fast and easy. 
             From initial contact to closing, Enmirex Homes handles everything.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {steps.map((step) => (
             <div key={step.number} className="text-center group">
-              <div className="relative mb-6">
+              <div className="relative mb-4 sm:mb-6">
                 <div 
-                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg"
+                  className="w-16 sm:w-20 h-16 sm:h-20 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg"
                   style={{ 
                     backgroundColor: step.bgColor === 'navy' ? 'hsl(218, 100%, 12%)' : 'hsl(45, 100%, 50%)',
                   }}
                 >
                   <span 
-                    className="text-2xl font-bold"
+                    className="text-xl sm:text-2xl font-bold"
                     style={{ 
                       color: step.bgColor === 'gold' ? 'hsl(218, 100%, 12%)' : 'white'
                     }}
@@ -71,21 +71,21 @@ export default function ProcessSection() {
                   </span>
                 </div>
                 {step.showArrow && (
-                  <div className="absolute -right-4 top-8 hidden lg:block">
-                    <ArrowRight className="w-8 h-8 text-gray-300" />
+                  <div className="absolute -right-4 top-6 sm:top-8 hidden lg:block">
+                    <ArrowRight className="w-6 sm:w-8 h-6 sm:h-8 text-gray-300" />
                   </div>
                 )}
               </div>
-              <h3 className="text-xl font-semibold text-primary mb-3">{step.title}</h3>
-              <p className="text-gray-600">{step.description}</p>
+              <h3 className="text-lg sm:text-xl font-semibold text-primary mb-2 sm:mb-3">{step.title}</h3>
+              <p className="text-sm sm:text-base text-gray-600">{step.description}</p>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 sm:mt-12">
           <button 
             onClick={() => scrollToSection('get-offer')}
-            className="px-8 py-4 rounded-lg font-bold text-lg shadow-lg border-2 transition-opacity hover:opacity-90"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg shadow-lg border-2 transition-opacity hover:opacity-90"
             style={{
               backgroundColor: 'hsl(45, 100%, 50%)',
               color: 'hsl(218, 100%, 12%)',

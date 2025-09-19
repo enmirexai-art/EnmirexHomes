@@ -132,14 +132,14 @@ export default function LeadForm() {
   };
 
   return (
-    <section id="get-offer" className="py-20 bg-gray-50">
+    <section id="get-offer" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4">
         <Card className="shadow-xl">
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold text-primary mb-4">
+          <CardHeader className="text-center p-6 sm:p-8">
+            <CardTitle className="text-2xl sm:text-3xl font-bold text-primary mb-3 sm:mb-4">
               Get Your Free Cash Offer
             </CardTitle>
-            <p className="text-lg text-gray-600">
+            <p className="text-base sm:text-lg text-gray-600">
               {currentStep === 1 
                 ? "Tell us about your property and contact information." 
                 : "Provide additional details about your property."
@@ -147,66 +147,68 @@ export default function LeadForm() {
             </p>
             
             {/* Progress Indicator */}
-            <div className="flex items-center justify-center space-x-4 mt-6">
+            <div className="flex items-center justify-center space-x-2 sm:space-x-4 mt-4 sm:mt-6">
               <div className={`flex items-center ${currentStep === 1 ? 'text-primary' : 'text-gray-400'}`}>
-                <div className={`rounded-full w-8 h-8 flex items-center justify-center border-2 ${
+                <div className={`rounded-full w-7 sm:w-8 h-7 sm:h-8 flex items-center justify-center border-2 text-sm ${
                   currentStep === 1 ? 'border-primary bg-primary text-white' : 'border-gray-300'
                 }`}>
                   1
                 </div>
-                <span className="ml-2 font-medium">Property Info</span>
+                <span className="ml-1 sm:ml-2 font-medium text-sm sm:text-base">Property Info</span>
               </div>
-              <div className="flex-1 h-0.5 bg-gray-300 mx-4">
+              <div className="flex-1 h-0.5 bg-gray-300 mx-2 sm:mx-4">
                 <div className={`h-full bg-primary transition-all duration-300 ${
                   currentStep > 1 ? 'w-full' : 'w-0'
                 }`}></div>
               </div>
               <div className={`flex items-center ${currentStep === 2 ? 'text-primary' : 'text-gray-400'}`}>
-                <div className={`rounded-full w-8 h-8 flex items-center justify-center border-2 ${
+                <div className={`rounded-full w-7 sm:w-8 h-7 sm:h-8 flex items-center justify-center border-2 text-sm ${
                   currentStep === 2 ? 'border-primary bg-primary text-white' : 'border-gray-300'
                 }`}>
                   2
                 </div>
-                <span className="ml-2 font-medium">Property Details</span>
+                <span className="ml-1 sm:ml-2 font-medium text-sm sm:text-base">Property Details</span>
               </div>
             </div>
           </CardHeader>
           
-          <CardContent className="p-8 lg:p-12">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <CardContent className="p-4 sm:p-6 lg:p-8 xl:p-12">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {/* Step 1: Property Address and Phone Number */}
               {currentStep === 1 && (
                 <>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <Label htmlFor="propertyAddress">Property Address *</Label>
+                      <Label htmlFor="propertyAddress" className="text-sm sm:text-base">Property Address *</Label>
                       <Input
                         id="propertyAddress"
                         value={formData.propertyAddress}
                         onChange={(e) => handleInputChange("propertyAddress", e.target.value)}
                         placeholder="123 Main Street"
                         required
+                        className="h-11 sm:h-12 text-base"
                         data-testid="input-property-address"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="city">City *</Label>
+                      <Label htmlFor="city" className="text-sm sm:text-base">City *</Label>
                       <Input
                         id="city"
                         value={formData.city}
                         onChange={(e) => handleInputChange("city", e.target.value)}
                         placeholder="Your City"
                         required
+                        className="h-11 sm:h-12 text-base"
                         data-testid="input-city"
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <Label htmlFor="state">State *</Label>
+                      <Label htmlFor="state" className="text-sm sm:text-base">State *</Label>
                       <Select value={formData.state} onValueChange={(value) => handleInputChange("state", value)}>
-                        <SelectTrigger data-testid="select-state">
+                        <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-state">
                           <SelectValue placeholder="Select State" />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-900 border-gray-700">
@@ -222,20 +224,21 @@ export default function LeadForm() {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="zipCode">ZIP Code *</Label>
+                      <Label htmlFor="zipCode" className="text-sm sm:text-base">ZIP Code *</Label>
                       <Input
                         id="zipCode"
                         value={formData.zipCode}
                         onChange={(e) => handleInputChange("zipCode", e.target.value)}
                         placeholder="12345"
                         required
+                        className="h-11 sm:h-12 text-base"
                         data-testid="input-zip-code"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="phoneNumber">Phone Number *</Label>
+                    <Label htmlFor="phoneNumber" className="text-sm sm:text-base">Phone Number *</Label>
                     <Input
                       id="phoneNumber"
                       type="tel"
@@ -243,14 +246,15 @@ export default function LeadForm() {
                       onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
                       placeholder="(555) 123-4567"
                       required
+                      className="h-11 sm:h-12 text-base"
                       data-testid="input-phone-number"
                     />
                   </div>
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-center sm:justify-end pt-4">
                     <button 
                       type="submit"
-                      className="px-8 py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-lg border-2"
+                      className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3 rounded-lg font-bold text-base sm:text-lg hover:opacity-90 transition-opacity shadow-lg border-2 flex items-center justify-center"
                       style={{
                         backgroundColor: 'hsl(218, 100%, 12%)',
                         color: 'white',
@@ -258,7 +262,7 @@ export default function LeadForm() {
                       }}
                       data-testid="button-next-step"
                     >
-                      Next Step <ChevronRight className="w-5 h-5 ml-2" />
+                      Next Step <ChevronRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
                     </button>
                   </div>
                 </>
@@ -267,11 +271,11 @@ export default function LeadForm() {
               {/* Step 2: Additional Details */}
               {currentStep === 2 && (
                 <>
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                     <div>
-                      <Label htmlFor="propertyType">Property Type</Label>
+                      <Label htmlFor="propertyType" className="text-sm sm:text-base">Property Type</Label>
                       <Select value={formData.propertyType} onValueChange={(value) => handleInputChange("propertyType", value)}>
-                        <SelectTrigger data-testid="select-property-type">
+                        <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-property-type">
                           <SelectValue placeholder="Select Type" />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-900 border-gray-700">
@@ -284,9 +288,9 @@ export default function LeadForm() {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="bedrooms">Bedrooms</Label>
+                      <Label htmlFor="bedrooms" className="text-sm sm:text-base">Bedrooms</Label>
                       <Select value={formData.bedrooms} onValueChange={(value) => handleInputChange("bedrooms", value)}>
-                        <SelectTrigger data-testid="select-bedrooms">
+                        <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-bedrooms">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-900 border-gray-700">
@@ -299,9 +303,9 @@ export default function LeadForm() {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="bathrooms">Bathrooms</Label>
+                      <Label htmlFor="bathrooms" className="text-sm sm:text-base">Bathrooms</Label>
                       <Select value={formData.bathrooms} onValueChange={(value) => handleInputChange("bathrooms", value)}>
-                        <SelectTrigger data-testid="select-bathrooms">
+                        <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-bathrooms">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-900 border-gray-700">
@@ -316,20 +320,21 @@ export default function LeadForm() {
                   </div>
 
                   <div>
-                    <Label htmlFor="squareFootage">Square Footage</Label>
+                    <Label htmlFor="squareFootage" className="text-sm sm:text-base">Square Footage</Label>
                     <Input
                       id="squareFootage"
                       value={formData.squareFootage}
                       onChange={(e) => handleInputChange("squareFootage", e.target.value)}
                       placeholder="e.g. 1500"
+                      className="h-11 sm:h-12 text-base"
                       data-testid="input-square-footage"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="propertyCondition">Property Condition</Label>
+                    <Label htmlFor="propertyCondition" className="text-sm sm:text-base">Property Condition</Label>
                     <Select value={formData.propertyCondition} onValueChange={(value) => handleInputChange("propertyCondition", value)}>
-                      <SelectTrigger data-testid="select-property-condition">
+                      <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-property-condition">
                         <SelectValue placeholder="Select Condition" />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-900 border-gray-700">
@@ -342,9 +347,9 @@ export default function LeadForm() {
                   </div>
 
                   <div>
-                    <Label htmlFor="sellingReason">Reason for Selling</Label>
+                    <Label htmlFor="sellingReason" className="text-sm sm:text-base">Reason for Selling</Label>
                     <Select value={formData.sellingReason} onValueChange={(value) => handleInputChange("sellingReason", value)}>
-                      <SelectTrigger data-testid="select-selling-reason">
+                      <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-selling-reason">
                         <SelectValue placeholder="Select Reason" />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-900 border-gray-700">
@@ -362,33 +367,35 @@ export default function LeadForm() {
                   {/* Show additional input when "Other" is selected */}
                   {formData.sellingReason === "other" && (
                     <div>
-                      <Label htmlFor="otherReason">Please specify other reason</Label>
+                      <Label htmlFor="otherReason" className="text-sm sm:text-base">Please specify other reason</Label>
                       <Input
                         id="otherReason"
                         value={formData.otherReason}
                         onChange={(e) => handleInputChange("otherReason", e.target.value)}
                         placeholder="Please describe your reason for selling..."
+                        className="h-11 sm:h-12 text-base"
                         data-testid="input-other-reason"
                       />
                     </div>
                   )}
 
-                  <div className="border-t pt-6">
-                    <h3 className="text-lg font-semibold text-primary mb-4">Contact Information</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
+                  <div className="border-t pt-4 sm:pt-6">
+                    <h3 className="text-base sm:text-lg font-semibold text-primary mb-3 sm:mb-4">Contact Information</h3>
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <Label htmlFor="fullName">Full Name *</Label>
+                        <Label htmlFor="fullName" className="text-sm sm:text-base">Full Name *</Label>
                         <Input
                           id="fullName"
                           value={formData.fullName}
                           onChange={(e) => handleInputChange("fullName", e.target.value)}
                           placeholder="John Smith"
                           required
+                          className="h-11 sm:h-12 text-base"
                           data-testid="input-full-name"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="email">Email Address *</Label>
+                        <Label htmlFor="email" className="text-sm sm:text-base">Email Address *</Label>
                         <Input
                           id="email"
                           type="email"
@@ -396,6 +403,7 @@ export default function LeadForm() {
                           onChange={(e) => handleInputChange("email", e.target.value)}
                           placeholder="john@email.com"
                           required
+                          className="h-11 sm:h-12 text-base"
                           data-testid="input-email"
                         />
                       </div>
@@ -403,32 +411,33 @@ export default function LeadForm() {
                   </div>
 
                   <div>
-                    <Label htmlFor="additionalDetails">Additional Details</Label>
+                    <Label htmlFor="additionalDetails" className="text-sm sm:text-base">Additional Details</Label>
                     <Textarea
                       id="additionalDetails"
                       value={formData.additionalDetails}
                       onChange={(e) => handleInputChange("additionalDetails", e.target.value)}
                       placeholder="Tell us anything else about your property or situation that might be helpful..."
                       rows={4}
+                      className="text-base"
                       data-testid="input-additional-details"
                     />
                   </div>
 
-                  <div className="flex justify-between">
+                  <div className="flex flex-col sm:flex-row justify-between gap-4 pt-4">
                     <Button 
                       type="button"
                       variant="outline"
                       onClick={prevStep}
-                      className="px-8 py-3 rounded-lg font-bold text-lg"
+                      className="px-6 sm:px-8 py-3 rounded-lg font-bold text-base sm:text-lg w-full sm:w-auto order-2 sm:order-1"
                       data-testid="button-back"
                     >
-                      <ChevronLeft className="w-5 h-5 mr-2" /> Back
+                      <ChevronLeft className="w-4 sm:w-5 h-4 sm:h-5 mr-2" /> Back
                     </Button>
                     
                     <button 
                       type="submit" 
                       disabled={submitMutation.isPending}
-                      className="px-12 py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-lg border-2 disabled:opacity-50"
+                      className="w-full sm:w-auto px-8 sm:px-12 py-3 rounded-lg font-bold text-base sm:text-lg hover:opacity-90 transition-opacity shadow-lg border-2 disabled:opacity-50 order-1 sm:order-2"
                       style={{
                         backgroundColor: 'hsl(218, 100%, 12%)',
                         color: 'white',

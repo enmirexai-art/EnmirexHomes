@@ -66,43 +66,43 @@ export default function PropertyShowcase() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Recently Purchased Properties</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Recently Purchased Properties</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
             See some of the properties we've helped homeowners sell quickly for cash.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {properties.map((property) => (
             <Card key={property.id} className="shadow-lg hover:shadow-xl transition-shadow">
               <div className="relative">
                 <img 
                   src={property.image} 
                   alt={property.title}
-                  className="w-full h-48 object-cover rounded-t-lg"
+                  className="w-full h-40 sm:h-48 object-cover rounded-t-lg"
                 />
               </div>
-              <CardContent className="p-6">
-                <div className="text-2xl font-bold text-primary mb-2">{property.price}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{property.title}</h3>
-                <div className="flex items-center text-gray-600 text-sm space-x-4 mb-3">
+              <CardContent className="p-4 sm:p-6">
+                <div className="text-xl sm:text-2xl font-bold text-primary mb-2">{property.price}</div>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{property.title}</h3>
+                <div className="flex flex-wrap items-center text-gray-600 text-xs sm:text-sm gap-2 sm:gap-4 mb-3">
                   <span className="flex items-center gap-1">
-                    <Bed className="w-4 h-4" />
+                    <Bed className="w-3 sm:w-4 h-3 sm:h-4" />
                     {property.beds} Beds
                   </span>
                   <span className="flex items-center gap-1">
-                    <Bath className="w-4 h-4" />
+                    <Bath className="w-3 sm:w-4 h-3 sm:h-4" />
                     {property.baths} Baths
                   </span>
                   <span className="flex items-center gap-1">
-                    <Square className="w-4 h-4" />
+                    <Square className="w-3 sm:w-4 h-3 sm:h-4" />
                     {property.sqft} sq ft
                   </span>
                 </div>
-                <p className="text-gray-600 text-sm">{property.description}</p>
+                <p className="text-gray-600 text-xs sm:text-sm">{property.description}</p>
               </CardContent>
             </Card>
           ))}

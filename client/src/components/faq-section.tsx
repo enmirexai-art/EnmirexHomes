@@ -43,32 +43,33 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-20 bg-gray-50">
+    <section id="faq" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-3 sm:mb-4">Frequently Asked Questions</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
             Get answers to the most common questions about Enmirex Homes' buying process.
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {faqs.map((faq) => (
             <Card key={faq.id} className="shadow-sm border border-gray-200">
               <button
-                className="w-full px-8 py-6 text-left flex justify-between items-center"
+                className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-left flex justify-between items-center"
                 onClick={() => toggleFAQ(faq.id)}
+                data-testid={`button-faq-${faq.id}`}
               >
-                <h3 className="text-lg font-semibold text-gray-900">{faq.question}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
                 <ChevronDown 
-                  className={`w-6 h-6 text-gray-400 transform transition-transform ${
+                  className={`w-5 sm:w-6 h-5 sm:h-6 text-gray-400 transform transition-transform flex-shrink-0 ${
                     openFAQ === faq.id ? 'rotate-180' : ''
                   }`}
                 />
               </button>
               {openFAQ === faq.id && (
-                <CardContent className="px-8 pb-6 pt-0">
-                  <p className="text-gray-600">{faq.answer}</p>
+                <CardContent className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 pt-0">
+                  <p className="text-sm sm:text-base text-gray-600">{faq.answer}</p>
                 </CardContent>
               )}
             </Card>

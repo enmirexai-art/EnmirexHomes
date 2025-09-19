@@ -35,25 +35,25 @@ export default function TestimonialsSection() {
   );
 
   return (
-    <section id="testimonials" className="py-20 bg-white">
+    <section id="testimonials" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">What Our Clients Say About Enmirex Homes</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-3 sm:mb-4">What Our Clients Say About Enmirex Homes</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
             Don't just take our word for it. Here's what homeowners have to say about their experience with Enmirex Homes.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((testimonial) => (
             <Card key={testimonial.id} className="bg-gray-50 hover:shadow-lg transition-shadow">
-              <CardContent className="p-8">
+              <CardContent className="p-6 sm:p-8">
                 <StarRating rating={testimonial.rating} />
-                <p className="text-gray-600 mb-4 italic">
+                <p className="text-sm sm:text-base text-gray-600 mb-4 italic">
                   "{testimonial.content}"
                 </p>
-                <div className="font-semibold text-primary">{testimonial.name}</div>
-                <div className="text-sm text-gray-500">{testimonial.subtitle}</div>
+                <div className="font-semibold text-primary text-sm sm:text-base">{testimonial.name}</div>
+                <div className="text-xs sm:text-sm text-gray-500">{testimonial.subtitle}</div>
               </CardContent>
             </Card>
           ))}
