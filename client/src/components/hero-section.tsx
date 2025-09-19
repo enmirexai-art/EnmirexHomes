@@ -17,7 +17,7 @@ export default function HeroSection() {
           <div>
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Sell Your Home 
-              <span className="text-secondary text-shadow-gold">Fast for Cash</span>
+              <span className="text-secondary text-shadow-gold"> Fast for Cash</span>
             </h1>
             <p className="text-xl mb-4 text-white/90">
               Get a fair cash offer in 24 hours. No repairs, no fees, no hassle. 
