@@ -14,28 +14,28 @@ export default function ProcessSection() {
       number: "1",
       title: "Share Property Info",
       description: "Tell us about your home through our simple form or give us a call. Basic details help us provide an accurate cash offer.",
-      bgColor: "bg-primary",
+      bgColor: "navy",
       showArrow: true,
     },
     {
       number: "2", 
       title: "Schedule Visit",
       description: "We'll arrange a convenient time to visit your property. Quick walk-through to assess condition and finalize our offer.",
-      bgColor: "bg-primary",
+      bgColor: "navy",
       showArrow: true,
     },
     {
       number: "3",
       title: "Get Cash Offer", 
       description: "Receive our fair, no-obligation cash offer within 24 hours. Review it at your pace - no pressure, no hidden fees.",
-      bgColor: "bg-primary",
+      bgColor: "navy",
       showArrow: true,
     },
     {
       number: "4",
       title: "Close & Get Paid",
       description: "Accept our offer and we'll handle the paperwork. Close on your timeline and get cash in your hands fast.",
-      bgColor: "bg-secondary",
+      bgColor: "gold",
       showArrow: false,
     },
   ];
@@ -55,8 +55,20 @@ export default function ProcessSection() {
           {steps.map((step) => (
             <div key={step.number} className="text-center group">
               <div className="relative mb-6">
-                <div className={`w-20 h-20 ${step.bgColor} rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg`}>
-                  <span className={`text-2xl font-bold ${step.bgColor === 'bg-secondary' ? 'text-primary' : 'text-white'}`}>{step.number}</span>
+                <div 
+                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg"
+                  style={{ 
+                    backgroundColor: step.bgColor === 'navy' ? 'hsl(218, 100%, 12%)' : 'hsl(45, 100%, 50%)',
+                  }}
+                >
+                  <span 
+                    className="text-2xl font-bold"
+                    style={{ 
+                      color: step.bgColor === 'gold' ? 'hsl(218, 100%, 12%)' : 'white'
+                    }}
+                  >
+                    {step.number}
+                  </span>
                 </div>
                 {step.showArrow && (
                   <div className="absolute -right-4 top-8 hidden lg:block">
@@ -71,12 +83,18 @@ export default function ProcessSection() {
         </div>
 
         <div className="text-center mt-12">
-          <Button 
+          <button 
             onClick={() => scrollToSection('get-offer')}
-            className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 shadow-lg border-2 border-secondary"
+            className="px-8 py-4 rounded-lg font-bold text-lg shadow-lg border-2 transition-opacity hover:opacity-90"
+            style={{
+              backgroundColor: 'hsl(45, 100%, 50%)',
+              color: 'hsl(218, 100%, 12%)',
+              borderColor: 'hsl(218, 100%, 12%)'
+            }}
+            data-testid="button-start-cash-offer"
           >
             Start Your Cash Offer Now
-          </Button>
+          </button>
         </div>
       </div>
     </section>
