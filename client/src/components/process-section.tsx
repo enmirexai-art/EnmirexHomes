@@ -55,7 +55,7 @@ export default function ProcessSection() {
           {steps.map((step) => (
             <div key={step.number} className="text-center group">
               <div className="relative mb-6">
-                <div className={`w-20 h-20 ${step.bgColor} rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform`}>
+                <div className={`w-20 h-20 ${step.bgColor} rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg`}>
                   <span className={`text-2xl font-bold ${step.bgColor === 'bg-secondary' ? 'text-primary' : 'text-white'}`}>{step.number}</span>
                 </div>
                 {step.showArrow && (

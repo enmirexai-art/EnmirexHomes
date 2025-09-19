@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Phone } from "lucide-react";
-import renovatedHomeImage from "@assets/image_1758244460533.png";
+import renovatedHomeImage from "@assets/stock_images/renovated_modern_hom_c6d048c5.jpg";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -64,7 +64,7 @@ export default function HeroSection() {
           <div>
             <img 
               src={renovatedHomeImage} 
-              alt="Texas renovated home exterior ready for cash purchase" 
+              alt="Renovated modern home exterior ready for cash purchase" 
               className="rounded-xl shadow-2xl w-full h-auto" 
             />
           </div>
