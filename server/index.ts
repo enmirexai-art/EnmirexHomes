@@ -1,10 +1,34 @@
 import express, { type Request, Response, NextFunction } from "express";
+import cors from "cors";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { setupSecurityMiddleware } from "./middleware/security";
+import { productionConfig, validateProductionConfig } from "./config/production";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+// Validate production configuration
+if (process.env.NODE_ENV === 'production') {
+  validateProductionConfig();
+}
+
+// Trust proxy configuration for reverse proxy (Nginx)
+if (productionConfig.trustProxy) {
+  app.set('trust proxy', 1);
+}
+
+// Security middleware for production
+if (process.env.NODE_ENV === 'production') {
+  setupSecurityMiddleware(app);
+}
+
+// CORS configuration
+if (productionConfig.cors.origin) {
+  app.use(cors(productionConfig.cors));
+}
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -37,6 +61,15 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Health check endpoint
+  app.get('/api/health', (req, res) => {
+    res.status(200).json({ 
+      status: 'healthy', 
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development'
+    });
+  });
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -56,16 +89,21 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
+  // Use production configuration for port and host
+  const port = process.env.NODE_ENV === 'production' ? productionConfig.port : parseInt(process.env.PORT || '5000', 10);
+  const host = process.env.NODE_ENV === 'production' ? productionConfig.host : "0.0.0.0";
+  
   server.listen({
     port,
-    host: "0.0.0.0",
+    host,
     reusePort: true,
   }, () => {
-    log(`serving on port ${port}`);
+    log(`🚀 Enmirex Homes server running in ${process.env.NODE_ENV || 'development'} mode`);
+    log(`📍 Server listening on ${host}:${port}`);
+    
+    if (process.env.NODE_ENV === 'production') {
+      log(`🔒 Security middleware enabled`);
+      log(`📊 Health check available at /api/health`);
+    }
   });
 })();
