@@ -1,6 +1,6 @@
 # Overview
 
-This is a real estate lead generation website for "Enmirex Homes," a cash house buying business. The application features a modern single-page design with sections for hero content, process explanation, lead capture form, property showcase, testimonials, and FAQ. The primary goal is to capture leads from homeowners interested in selling their properties quickly for cash.
+This is a real estate lead generation website for "Enmirex Homes," a cash home buying business. The application features a modern single-page design with sections for hero content, process explanation, lead capture form, property showcase, testimonials, and FAQ. The primary goal is to capture leads from homeowners interested in selling their properties quickly for cash.
 
 # User Preferences
 

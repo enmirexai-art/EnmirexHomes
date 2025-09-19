@@ -7,14 +7,14 @@ export default function TestimonialsSection() {
       id: 1,
       name: "Sarah Johnson",
       subtitle: "Relocated to Dallas",
-      content: "I needed to sell my house quickly due to a job relocation. Enmirex Homes made the process incredibly easy and stress-free. They gave me a fair offer and closed in just 10 days. Couldn't be happier!",
+      content: "I needed to sell my home quickly due to a job relocation. Enmirex Homes made the process incredibly easy and stress-free. They gave me a fair offer and closed in just 10 days. Couldn't be happier!",
       rating: 5
     },
     {
       id: 2,
       name: "Michael Chen",
       subtitle: "Inherited Property",
-      content: "After inheriting my grandmother's house, I didn't know what to do with it. The team at Enmirex was so helpful and understanding. They bought it as-is and saved me months of headaches. Thank you!",
+      content: "After inheriting my grandmother's home, I didn't know what to do with it. The team at Enmirex was so helpful and understanding. They bought it as-is and saved me months of headaches. Thank you!",
       rating: 5
     },
     {

@@ -13,7 +13,7 @@ export default function ProcessSection() {
     {
       number: "1",
       title: "Share Property Info",
-      description: "Tell us about your house through our simple form or give us a call. Basic details help us provide an accurate cash offer.",
+      description: "Tell us about your home through our simple form or give us a call. Basic details help us provide an accurate cash offer.",
       bgColor: "bg-primary",
       showArrow: true,
     },
@@ -46,7 +46,7 @@ export default function ProcessSection() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-primary mb-4">How Enmirex Homes Works - Simple 4 Steps</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our proven process makes selling your house fast and easy. 
+            Our proven process makes selling your home fast and easy. 
             From initial contact to closing, Enmirex Homes handles everything.
           </p>
         </div>

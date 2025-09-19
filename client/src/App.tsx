@@ -64,7 +64,7 @@ function Chatbox() {
             <div className="flex-1 mb-4 border rounded-lg p-3 bg-gray-50 overflow-y-auto">
               <div className="text-center text-gray-500 text-sm">
                 <MessageCircle className="w-8 h-8 mx-auto mb-2 text-primary" />
-                <p>Hi! I'm here to help you sell your house quickly for cash.</p>
+                <p>Hi! I'm here to help you sell your home quickly for cash.</p>
                 <p className="text-xs mt-2">
                   <em>AI Assistant integration coming soon...</em>
                 </p>

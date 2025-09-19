@@ -13,7 +13,7 @@ export default function Footer() {
       {/* Final CTA Section */}
       <section className="py-20 gradient-primary text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Sell Your House Fast?</h2>
+          <h2 className="text-4xl font-bold mb-6">Ready to Sell Your Home Fast?</h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Get your fair cash offer today. No repairs, no fees, no hassle. 
             Join hundreds of satisfied homeowners who chose the fast, easy way to sell.
@@ -53,7 +53,7 @@ export default function Footer() {
             <div>
               <div className="text-2xl font-bold mb-4 text-secondary">Enmirex Homes</div>
               <p className="text-gray-300 mb-4">
-                Professional real estate investors helping homeowners sell their houses fast for cash. 
+                Professional real estate investors helping homeowners sell their homes fast for cash. 
                 No repairs, no fees, no hassle.
               </p>
               <div className="text-lg font-semibold">Call us today:</div>
@@ -113,7 +113,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">We Buy Houses In</h3>
+              <h3 className="text-lg font-semibold mb-4">We Buy Homes In</h3>
               <ul className="space-y-2 text-gray-300">
                 <li>Any Condition</li>
                 <li>Any Situation</li>

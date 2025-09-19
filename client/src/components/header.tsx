@@ -57,7 +57,9 @@ export default function Header() {
           </a>
           <Button 
             onClick={() => scrollToSection('get-offer')}
-            className="bg-white text-primary hover:bg-gray-100 font-bold shadow-md"
+            style={{ backgroundColor: 'hsl(45, 100%, 50%)', color: 'hsl(218, 100%, 12%)' }}
+            className="px-8 py-4 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-lg"
+            data-testid="button-get-cash-offer-header"
           >
             Get Cash Offer
           </Button>

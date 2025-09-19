@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Phone } from "lucide-react";
-import renovatedHomeImage from "@assets/stock_images/remodeled_renovated__64fb4def.jpg";
+import renovatedHomeImage from "@assets/image_1758244460533.png";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -16,15 +16,15 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Sell Your House 
+              Sell Your Home 
               <span className="text-secondary text-shadow-gold">Fast for Cash</span>
             </h1>
             <p className="text-xl mb-4 text-white/90">
               Get a fair cash offer in 24 hours. No repairs, no fees, no hassle. 
-              We buy houses in any condition throughout your area.
+              We buy homes in any condition throughout your area.
             </p>
             <p className="text-lg mb-8 text-secondary font-semibold">
-              — Enmirex Homes: Your Trusted Cash House Buyer
+              — Enmirex Homes: Your Trusted Cash Home Buyer
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button 
@@ -64,7 +64,7 @@ export default function HeroSection() {
           <div>
             <img 
               src={renovatedHomeImage} 
-              alt="Beautiful remodeled home exterior ready for cash purchase" 
+              alt="Texas renovated home exterior ready for cash purchase" 
               className="rounded-xl shadow-2xl w-full h-auto" 
             />
           </div>

@@ -8,13 +8,13 @@ export default function FAQSection() {
   const faqs = [
     {
       id: 1,
-      question: "How fast can you buy my house?",
+      question: "How fast can you buy my home?",
       answer: "We can typically make an offer within 24 hours of seeing your property and close in as little as 7 days. The exact timeline depends on your needs - we're flexible and can work around your schedule."
     },
     {
       id: 2,
       question: "Do I need to make repairs before selling?",
-      answer: "No! We buy houses completely as-is. You don't need to make any repairs, clean, or stage the property. We handle everything and factor the property's condition into our fair cash offer."
+      answer: "No! We buy homes completely as-is. You don't need to make any repairs, clean, or stage the property. We handle everything and factor the property's condition into our fair cash offer."
     },
     {
       id: 3,
