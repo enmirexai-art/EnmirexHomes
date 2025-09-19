@@ -29,6 +29,7 @@ export default function LeadForm() {
     squareFootage: "",
     propertyCondition: "",
     sellingReason: "",
+    otherReason: "",
     fullName: "",
     phoneNumber: "",
     email: "",
@@ -207,15 +208,15 @@ export default function LeadForm() {
                         <SelectTrigger data-testid="select-state">
                           <SelectValue placeholder="Select State" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="AL">Alabama</SelectItem>
-                          <SelectItem value="CA">California</SelectItem>
-                          <SelectItem value="FL">Florida</SelectItem>
-                          <SelectItem value="TX">Texas</SelectItem>
-                          <SelectItem value="NY">New York</SelectItem>
-                          <SelectItem value="NC">North Carolina</SelectItem>
-                          <SelectItem value="GA">Georgia</SelectItem>
-                          <SelectItem value="OH">Ohio</SelectItem>
+                        <SelectContent className="bg-gray-900 border-gray-700">
+                          <SelectItem value="AL" className="text-white hover:bg-gray-800 focus:bg-gray-800">Alabama</SelectItem>
+                          <SelectItem value="CA" className="text-white hover:bg-gray-800 focus:bg-gray-800">California</SelectItem>
+                          <SelectItem value="FL" className="text-white hover:bg-gray-800 focus:bg-gray-800">Florida</SelectItem>
+                          <SelectItem value="TX" className="text-white hover:bg-gray-800 focus:bg-gray-800">Texas</SelectItem>
+                          <SelectItem value="NY" className="text-white hover:bg-gray-800 focus:bg-gray-800">New York</SelectItem>
+                          <SelectItem value="NC" className="text-white hover:bg-gray-800 focus:bg-gray-800">North Carolina</SelectItem>
+                          <SelectItem value="GA" className="text-white hover:bg-gray-800 focus:bg-gray-800">Georgia</SelectItem>
+                          <SelectItem value="OH" className="text-white hover:bg-gray-800 focus:bg-gray-800">Ohio</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -272,12 +273,12 @@ export default function LeadForm() {
                         <SelectTrigger data-testid="select-property-type">
                           <SelectValue placeholder="Select Type" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="single-family">Single Family Home</SelectItem>
-                          <SelectItem value="townhouse">Townhouse</SelectItem>
-                          <SelectItem value="condo">Condo</SelectItem>
-                          <SelectItem value="multi-family">Multi-Family</SelectItem>
-                          <SelectItem value="mobile">Mobile Home</SelectItem>
+                        <SelectContent className="bg-gray-900 border-gray-700">
+                          <SelectItem value="single-family" className="text-white hover:bg-gray-800 focus:bg-gray-800">Single Family Home</SelectItem>
+                          <SelectItem value="townhouse" className="text-white hover:bg-gray-800 focus:bg-gray-800">Townhouse</SelectItem>
+                          <SelectItem value="condo" className="text-white hover:bg-gray-800 focus:bg-gray-800">Condo</SelectItem>
+                          <SelectItem value="multi-family" className="text-white hover:bg-gray-800 focus:bg-gray-800">Multi-Family</SelectItem>
+                          <SelectItem value="mobile" className="text-white hover:bg-gray-800 focus:bg-gray-800">Mobile Home</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -287,12 +288,12 @@ export default function LeadForm() {
                         <SelectTrigger data-testid="select-bedrooms">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="3">3</SelectItem>
-                          <SelectItem value="4">4</SelectItem>
-                          <SelectItem value="5+">5+</SelectItem>
+                        <SelectContent className="bg-gray-900 border-gray-700">
+                          <SelectItem value="1" className="text-white hover:bg-gray-800 focus:bg-gray-800">1</SelectItem>
+                          <SelectItem value="2" className="text-white hover:bg-gray-800 focus:bg-gray-800">2</SelectItem>
+                          <SelectItem value="3" className="text-white hover:bg-gray-800 focus:bg-gray-800">3</SelectItem>
+                          <SelectItem value="4" className="text-white hover:bg-gray-800 focus:bg-gray-800">4</SelectItem>
+                          <SelectItem value="5+" className="text-white hover:bg-gray-800 focus:bg-gray-800">5+</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -302,12 +303,12 @@ export default function LeadForm() {
                         <SelectTrigger data-testid="select-bathrooms">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="1.5">1.5</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="2.5">2.5</SelectItem>
-                          <SelectItem value="3+">3+</SelectItem>
+                        <SelectContent className="bg-gray-900 border-gray-700">
+                          <SelectItem value="1" className="text-white hover:bg-gray-800 focus:bg-gray-800">1</SelectItem>
+                          <SelectItem value="1.5" className="text-white hover:bg-gray-800 focus:bg-gray-800">1.5</SelectItem>
+                          <SelectItem value="2" className="text-white hover:bg-gray-800 focus:bg-gray-800">2</SelectItem>
+                          <SelectItem value="2.5" className="text-white hover:bg-gray-800 focus:bg-gray-800">2.5</SelectItem>
+                          <SelectItem value="3+" className="text-white hover:bg-gray-800 focus:bg-gray-800">3+</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -330,11 +331,11 @@ export default function LeadForm() {
                       <SelectTrigger data-testid="select-property-condition">
                         <SelectValue placeholder="Select Condition" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="excellent">Excellent - Move-in ready</SelectItem>
-                        <SelectItem value="good">Good - Minor repairs needed</SelectItem>
-                        <SelectItem value="fair">Fair - Some repairs needed</SelectItem>
-                        <SelectItem value="poor">Poor - Major repairs needed</SelectItem>
+                      <SelectContent className="bg-gray-900 border-gray-700">
+                        <SelectItem value="excellent" className="text-white hover:bg-gray-800 focus:bg-gray-800">Excellent - Move-in ready</SelectItem>
+                        <SelectItem value="good" className="text-white hover:bg-gray-800 focus:bg-gray-800">Good - Minor repairs needed</SelectItem>
+                        <SelectItem value="fair" className="text-white hover:bg-gray-800 focus:bg-gray-800">Fair - Some repairs needed</SelectItem>
+                        <SelectItem value="poor" className="text-white hover:bg-gray-800 focus:bg-gray-800">Poor - Major repairs needed</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -345,17 +346,31 @@ export default function LeadForm() {
                       <SelectTrigger data-testid="select-selling-reason">
                         <SelectValue placeholder="Select Reason" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="relocating">Relocating</SelectItem>
-                        <SelectItem value="foreclosure">Facing Foreclosure</SelectItem>
-                        <SelectItem value="inherited">Inherited Property</SelectItem>
-                        <SelectItem value="divorce">Divorce</SelectItem>
-                        <SelectItem value="financial">Financial Hardship</SelectItem>
-                        <SelectItem value="tired-landlord">Tired of Being Landlord</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                      <SelectContent className="bg-gray-900 border-gray-700">
+                        <SelectItem value="relocating" className="text-white hover:bg-gray-800 focus:bg-gray-800">Relocating</SelectItem>
+                        <SelectItem value="foreclosure" className="text-white hover:bg-gray-800 focus:bg-gray-800">Facing Foreclosure</SelectItem>
+                        <SelectItem value="inherited" className="text-white hover:bg-gray-800 focus:bg-gray-800">Inherited Property</SelectItem>
+                        <SelectItem value="divorce" className="text-white hover:bg-gray-800 focus:bg-gray-800">Divorce</SelectItem>
+                        <SelectItem value="financial" className="text-white hover:bg-gray-800 focus:bg-gray-800">Financial Hardship</SelectItem>
+                        <SelectItem value="tired-landlord" className="text-white hover:bg-gray-800 focus:bg-gray-800">Tired of Being Landlord</SelectItem>
+                        <SelectItem value="other" className="text-white hover:bg-gray-800 focus:bg-gray-800">Other</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
+
+                  {/* Show additional input when "Other" is selected */}
+                  {formData.sellingReason === "other" && (
+                    <div>
+                      <Label htmlFor="otherReason">Please specify other reason</Label>
+                      <Input
+                        id="otherReason"
+                        value={formData.otherReason}
+                        onChange={(e) => handleInputChange("otherReason", e.target.value)}
+                        placeholder="Please describe your reason for selling..."
+                        data-testid="input-other-reason"
+                      />
+                    </div>
+                  )}
 
                   <div className="border-t pt-6">
                     <h3 className="text-lg font-semibold text-primary mb-4">Contact Information</h3>

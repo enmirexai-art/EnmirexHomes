@@ -15,6 +15,7 @@ export const leads = pgTable("leads", {
   squareFootage: text("square_footage"),
   propertyCondition: text("property_condition"),
   sellingReason: text("selling_reason"),
+  otherReason: text("other_reason"),
   fullName: text("full_name").notNull(),
   phoneNumber: text("phone_number").notNull(),
   email: text("email").notNull(),

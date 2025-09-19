@@ -39,13 +39,14 @@ async function saveToGoogleSheets(leadData: any) {
         leadData.squareFootage || '',
         leadData.propertyCondition || '',
         leadData.sellingReason || '',
+        leadData.otherReason || '',
         leadData.additionalDetails || '',
       ],
     ];
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: 'Sheet1!A:O',
+      range: 'Sheet1!A:P',
       valueInputOption: 'RAW',
       requestBody: {
         values,
