@@ -28,9 +28,9 @@ export default function HeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button 
-                variant="secondary"
                 onClick={() => scrollToSection('get-offer')}
-                className="px-8 py-4 rounded-lg font-bold text-lg shadow-lg"
+                style={{ backgroundColor: 'hsl(45, 100%, 50%)', color: 'hsl(218, 100%, 12%)' }}
+                className="px-8 py-4 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-lg"
                 data-testid="button-get-cash-offer"
               >
                 Get My Cash Offer Now
