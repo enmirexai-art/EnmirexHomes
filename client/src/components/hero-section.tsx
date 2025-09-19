@@ -20,7 +20,7 @@ export default function HeroSection() {
               <span className="text-secondary text-shadow-gold"> Fast for Cash</span>
             </h1>
             <p className="text-xl mb-4 text-white/90">
-              Get a fair cash offer in 24 hours. No repairs, no fees, no hassle. 
+              Get a fair cash offer in 24 hours.
               We buy homes in any condition throughout your area.
             </p>
             <p className="text-lg mb-8 text-secondary font-semibold">
@@ -54,6 +54,10 @@ export default function HeroSection() {
               <div className="flex items-center">
                 <Check className="w-5 h-5 mr-2 text-secondary" />
                 No Agent Fees
+              </div>
+              <div className="flex items-center">
+                <Check className="w-5 h-5 mr-2 text-secondary" />
+                No Hassle
               </div>
               <div className="flex items-center">
                 <Check className="w-5 h-5 mr-2 text-secondary" />
