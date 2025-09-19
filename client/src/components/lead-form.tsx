@@ -246,13 +246,18 @@ export default function LeadForm() {
                   </div>
 
                   <div className="flex justify-end">
-                    <Button 
+                    <button 
                       type="submit"
-                      className="bg-primary text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-primary/90 shadow-lg border-2 border-secondary"
+                      className="px-8 py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-lg border-2"
+                      style={{
+                        backgroundColor: 'hsl(218, 100%, 12%)',
+                        color: 'white',
+                        borderColor: 'hsl(45, 100%, 50%)'
+                      }}
                       data-testid="button-next-step"
                     >
                       Next Step <ChevronRight className="w-5 h-5 ml-2" />
-                    </Button>
+                    </button>
                   </div>
                 </>
               )}
@@ -404,14 +409,19 @@ export default function LeadForm() {
                       <ChevronLeft className="w-5 h-5 mr-2" /> Back
                     </Button>
                     
-                    <Button 
+                    <button 
                       type="submit" 
                       disabled={submitMutation.isPending}
-                      className="bg-primary text-white px-12 py-3 rounded-lg font-bold text-lg hover:bg-primary/90 shadow-lg border-2 border-secondary"
+                      className="px-12 py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-lg border-2 disabled:opacity-50"
+                      style={{
+                        backgroundColor: 'hsl(218, 100%, 12%)',
+                        color: 'white',
+                        borderColor: 'hsl(45, 100%, 50%)'
+                      }}
                       data-testid="button-submit-offer"
                     >
                       {submitMutation.isPending ? "Submitting..." : "Get My Free Cash Offer"}
-                    </Button>
+                    </button>
                   </div>
 
                   <p className="text-sm text-gray-500 text-center mt-4">

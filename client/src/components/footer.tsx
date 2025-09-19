@@ -22,7 +22,12 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
             <button 
               onClick={() => scrollToSection('get-offer')}
-              className="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+              className="px-8 py-4 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-lg"
+              style={{
+                backgroundColor: 'hsl(45, 100%, 50%)',
+                color: 'hsl(218, 100%, 12%)'
+              }}
+              data-testid="button-get-cash-offer-footer"
             >
               Get My Cash Offer Now
             </button>
@@ -47,7 +52,7 @@ export default function Footer() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-primary text-white py-12">
+      <footer className="text-white py-12" style={{ backgroundColor: 'hsl(218, 100%, 12%)' }}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
