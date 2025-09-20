@@ -58,11 +58,11 @@ export default function Header() {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <a 
-              href="tel:(555) 123-4567" 
+              href="tel:(469) 730-6711" 
               className="text-secondary font-bold hover:text-secondary/80 transition-colors flex items-center gap-1"
             >
               <Phone className="w-4 h-4" />
-              (555) 123-4567
+              (469) 730-6711
             </a>
             <Button 
               onClick={() => scrollToSection('get-offer')}
@@ -77,7 +77,7 @@ export default function Header() {
           {/* Mobile Actions */}
           <div className="flex md:hidden items-center space-x-2">
             <a 
-              href="tel:(555) 123-4567" 
+              href="tel:(469) 73-4567" 
               className="text-secondary font-bold hover:text-secondary/80 transition-colors"
               data-testid="button-call-mobile"
             >
