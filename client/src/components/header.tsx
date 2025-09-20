@@ -15,7 +15,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-primary shadow-lg sticky top-0 z-50">
+    <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2 sm:space-x-4">
@@ -24,7 +24,7 @@ export default function Header() {
               alt="Enmirex Homes Logo"
               className="h-12 sm:h-16 w-auto"
             />
-            <div className="text-lg sm:text-2xl font-bold text-secondary">
+            <div className="text-lg sm:text-2xl font-bold text-primary">
               Enmirex Homes
             </div>
           </div>
@@ -33,25 +33,25 @@ export default function Header() {
           <nav className="hidden md:flex space-x-8">
             <button
               onClick={() => scrollToSection("how-it-works")}
-              className="text-white hover:text-secondary transition-colors font-medium"
+              className="text-gray-700 hover:text-secondary transition-colors font-medium"
             >
               How It Works
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="text-white hover:text-secondary transition-colors font-medium"
+              className="text-gray-700 hover:text-secondary transition-colors font-medium"
             >
               About
             </button>
             <button
               onClick={() => scrollToSection("testimonials")}
-              className="text-white hover:text-secondary transition-colors font-medium"
+              className="text-gray-700 hover:text-secondary transition-colors font-medium"
             >
               Reviews
             </button>
             <button
               onClick={() => scrollToSection("faq")}
-              className="text-white hover:text-secondary transition-colors font-medium"
+              className="text-gray-700 hover:text-secondary transition-colors font-medium"
             >
               FAQ
             </button>
@@ -90,7 +90,7 @@ export default function Header() {
             </a>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:text-secondary transition-colors p-2"
+              className="text-gray-700 hover:text-secondary transition-colors p-2"
               data-testid="button-mobile-menu"
             >
               {isMobileMenuOpen ? (
@@ -104,32 +104,32 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/20">
+          <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4 pt-4">
               <button
                 onClick={() => scrollToSection("how-it-works")}
-                className="text-white hover:text-secondary transition-colors font-medium text-left"
+                className="text-gray-700 hover:text-secondary transition-colors font-medium text-left"
                 data-testid="link-mobile-how-it-works"
               >
                 How It Works
               </button>
               <button
                 onClick={() => scrollToSection("about")}
-                className="text-white hover:text-secondary transition-colors font-medium text-left"
+                className="text-gray-700 hover:text-secondary transition-colors font-medium text-left"
                 data-testid="link-mobile-about"
               >
                 About
               </button>
               <button
                 onClick={() => scrollToSection("testimonials")}
-                className="text-white hover:text-secondary transition-colors font-medium text-left"
+                className="text-gray-700 hover:text-secondary transition-colors font-medium text-left"
                 data-testid="link-mobile-reviews"
               >
                 Reviews
               </button>
               <button
                 onClick={() => scrollToSection("faq")}
-                className="text-white hover:text-secondary transition-colors font-medium text-left"
+                className="text-gray-700 hover:text-secondary transition-colors font-medium text-left"
                 data-testid="link-mobile-faq"
               >
                 FAQ
