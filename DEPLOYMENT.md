@@ -5,7 +5,7 @@ This guide covers deploying the Enmirex Homes website to Hostinger VPS for produ
 ## Prerequisites
 
 - **Hostinger VPS hosting** (minimum KVM1 plan at $4.99/month)
-- **Domain name** configured to point to your VPS IP
+- **Domain name** (enmirex.com) configured to point to your VPS IP
 - **SSL certificate** for HTTPS
 - **Google Sheets API credentials** for lead capture
 
@@ -79,7 +79,7 @@ TRUST_PROXY=true
 # Copy Nginx configuration
 cp nginx.conf.example /etc/nginx/sites-available/enmirex-homes
 
-# Edit the configuration with your domain
+# Edit the configuration with your domain (enmirex.com)
 nano /etc/nginx/sites-available/enmirex-homes
 
 # Enable the site
@@ -98,7 +98,7 @@ systemctl reload nginx
 apt install certbot python3-certbot-nginx -y
 
 # Get SSL certificate
-certbot --nginx -d yourdomain.com -d www.yourdomain.com
+certbot --nginx -d enmirex.com -d www.enmirex.com
 
 # Auto-renewal test
 certbot renew --dry-run
@@ -206,7 +206,7 @@ pm2 monit
 curl http://localhost:3000/api/health
 
 # Test from external
-curl https://yourdomain.com/api/health
+curl https://enmirex.com/api/health
 ```
 
 ### Log Management
