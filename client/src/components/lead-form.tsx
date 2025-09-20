@@ -211,15 +211,15 @@ export default function LeadForm() {
                         <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-state">
                           <SelectValue placeholder="Select State" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-900 border-gray-700">
-                          <SelectItem value="AL" className="text-white hover:bg-gray-800 focus:bg-gray-800">Alabama</SelectItem>
-                          <SelectItem value="CA" className="text-white hover:bg-gray-800 focus:bg-gray-800">California</SelectItem>
-                          <SelectItem value="FL" className="text-white hover:bg-gray-800 focus:bg-gray-800">Florida</SelectItem>
-                          <SelectItem value="TX" className="text-white hover:bg-gray-800 focus:bg-gray-800">Texas</SelectItem>
-                          <SelectItem value="NY" className="text-white hover:bg-gray-800 focus:bg-gray-800">New York</SelectItem>
-                          <SelectItem value="NC" className="text-white hover:bg-gray-800 focus:bg-gray-800">North Carolina</SelectItem>
-                          <SelectItem value="GA" className="text-white hover:bg-gray-800 focus:bg-gray-800">Georgia</SelectItem>
-                          <SelectItem value="OH" className="text-white hover:bg-gray-800 focus:bg-gray-800">Ohio</SelectItem>
+                        <SelectContent className="bg-white border-gray-300 shadow-lg">
+                          <SelectItem value="AL" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Alabama</SelectItem>
+                          <SelectItem value="CA" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">California</SelectItem>
+                          <SelectItem value="FL" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Florida</SelectItem>
+                          <SelectItem value="TX" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Texas</SelectItem>
+                          <SelectItem value="NY" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">New York</SelectItem>
+                          <SelectItem value="NC" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">North Carolina</SelectItem>
+                          <SelectItem value="GA" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Georgia</SelectItem>
+                          <SelectItem value="OH" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Ohio</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -278,12 +278,12 @@ export default function LeadForm() {
                         <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-property-type">
                           <SelectValue placeholder="Select Type" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-900 border-gray-700">
-                          <SelectItem value="single-family" className="text-white hover:bg-gray-800 focus:bg-gray-800">Single Family Home</SelectItem>
-                          <SelectItem value="townhouse" className="text-white hover:bg-gray-800 focus:bg-gray-800">Townhouse</SelectItem>
-                          <SelectItem value="condo" className="text-white hover:bg-gray-800 focus:bg-gray-800">Condo</SelectItem>
-                          <SelectItem value="multi-family" className="text-white hover:bg-gray-800 focus:bg-gray-800">Multi-Family</SelectItem>
-                          <SelectItem value="mobile" className="text-white hover:bg-gray-800 focus:bg-gray-800">Mobile Home</SelectItem>
+                        <SelectContent className="bg-white border-gray-300 shadow-lg">
+                          <SelectItem value="single-family" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Single Family Home</SelectItem>
+                          <SelectItem value="townhouse" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Townhouse</SelectItem>
+                          <SelectItem value="condo" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Condo</SelectItem>
+                          <SelectItem value="multi-family" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Multi-Family</SelectItem>
+                          <SelectItem value="mobile" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Mobile Home</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -293,12 +293,12 @@ export default function LeadForm() {
                         <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-bedrooms">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-900 border-gray-700">
-                          <SelectItem value="1" className="text-white hover:bg-gray-800 focus:bg-gray-800">1</SelectItem>
-                          <SelectItem value="2" className="text-white hover:bg-gray-800 focus:bg-gray-800">2</SelectItem>
-                          <SelectItem value="3" className="text-white hover:bg-gray-800 focus:bg-gray-800">3</SelectItem>
-                          <SelectItem value="4" className="text-white hover:bg-gray-800 focus:bg-gray-800">4</SelectItem>
-                          <SelectItem value="5+" className="text-white hover:bg-gray-800 focus:bg-gray-800">5+</SelectItem>
+                        <SelectContent className="bg-white border-gray-300 shadow-lg">
+                          <SelectItem value="1" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">1</SelectItem>
+                          <SelectItem value="2" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">2</SelectItem>
+                          <SelectItem value="3" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">3</SelectItem>
+                          <SelectItem value="4" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">4</SelectItem>
+                          <SelectItem value="5+" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">5+</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -308,12 +308,12 @@ export default function LeadForm() {
                         <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-bathrooms">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-900 border-gray-700">
-                          <SelectItem value="1" className="text-white hover:bg-gray-800 focus:bg-gray-800">1</SelectItem>
-                          <SelectItem value="1.5" className="text-white hover:bg-gray-800 focus:bg-gray-800">1.5</SelectItem>
-                          <SelectItem value="2" className="text-white hover:bg-gray-800 focus:bg-gray-800">2</SelectItem>
-                          <SelectItem value="2.5" className="text-white hover:bg-gray-800 focus:bg-gray-800">2.5</SelectItem>
-                          <SelectItem value="3+" className="text-white hover:bg-gray-800 focus:bg-gray-800">3+</SelectItem>
+                        <SelectContent className="bg-white border-gray-300 shadow-lg">
+                          <SelectItem value="1" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">1</SelectItem>
+                          <SelectItem value="1.5" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">1.5</SelectItem>
+                          <SelectItem value="2" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">2</SelectItem>
+                          <SelectItem value="2.5" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">2.5</SelectItem>
+                          <SelectItem value="3+" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">3+</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -337,11 +337,11 @@ export default function LeadForm() {
                       <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-property-condition">
                         <SelectValue placeholder="Select Condition" />
                       </SelectTrigger>
-                      <SelectContent className="bg-gray-900 border-gray-700">
-                        <SelectItem value="excellent" className="text-white hover:bg-gray-800 focus:bg-gray-800">Excellent - Move-in ready</SelectItem>
-                        <SelectItem value="good" className="text-white hover:bg-gray-800 focus:bg-gray-800">Good - Minor repairs needed</SelectItem>
-                        <SelectItem value="fair" className="text-white hover:bg-gray-800 focus:bg-gray-800">Fair - Some repairs needed</SelectItem>
-                        <SelectItem value="poor" className="text-white hover:bg-gray-800 focus:bg-gray-800">Poor - Major repairs needed</SelectItem>
+                      <SelectContent className="bg-white border-gray-300 shadow-lg">
+                        <SelectItem value="excellent" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Excellent - Move-in ready</SelectItem>
+                        <SelectItem value="good" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Good - Minor repairs needed</SelectItem>
+                        <SelectItem value="fair" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Fair - Some repairs needed</SelectItem>
+                        <SelectItem value="poor" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Poor - Major repairs needed</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -352,14 +352,14 @@ export default function LeadForm() {
                       <SelectTrigger className="h-11 sm:h-12 text-base" data-testid="select-selling-reason">
                         <SelectValue placeholder="Select Reason" />
                       </SelectTrigger>
-                      <SelectContent className="bg-gray-900 border-gray-700">
-                        <SelectItem value="relocating" className="text-white hover:bg-gray-800 focus:bg-gray-800">Relocating</SelectItem>
-                        <SelectItem value="foreclosure" className="text-white hover:bg-gray-800 focus:bg-gray-800">Facing Foreclosure</SelectItem>
-                        <SelectItem value="inherited" className="text-white hover:bg-gray-800 focus:bg-gray-800">Inherited Property</SelectItem>
-                        <SelectItem value="divorce" className="text-white hover:bg-gray-800 focus:bg-gray-800">Divorce</SelectItem>
-                        <SelectItem value="financial" className="text-white hover:bg-gray-800 focus:bg-gray-800">Financial Hardship</SelectItem>
-                        <SelectItem value="tired-landlord" className="text-white hover:bg-gray-800 focus:bg-gray-800">Tired of Being Landlord</SelectItem>
-                        <SelectItem value="other" className="text-white hover:bg-gray-800 focus:bg-gray-800">Other</SelectItem>
+                      <SelectContent className="bg-white border-gray-300 shadow-lg">
+                        <SelectItem value="relocating" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Relocating</SelectItem>
+                        <SelectItem value="foreclosure" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Facing Foreclosure</SelectItem>
+                        <SelectItem value="inherited" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Inherited Property</SelectItem>
+                        <SelectItem value="divorce" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Divorce</SelectItem>
+                        <SelectItem value="financial" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Financial Hardship</SelectItem>
+                        <SelectItem value="tired-landlord" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Tired of Being Landlord</SelectItem>
+                        <SelectItem value="other" className="text-gray-900 hover:bg-blue-50 focus:bg-blue-100 data-[state=checked]:bg-blue-500 data-[state=checked]:text-white cursor-pointer">Other</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
