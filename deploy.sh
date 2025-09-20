@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Deployment script for Enmirex Homes on Hostinger VPS
+# Deployment script for Enmirex Homes on Google Cloud Platform e2 micro VM
 # Make this file executable: chmod +x deploy.sh
 
 set -e

@@ -1,62 +1,69 @@
-# Enmirex Homes - Production Deployment Guide
+# Enmirex Homes - Google Cloud Platform Deployment Guide
 
-This guide covers deploying the Enmirex Homes website to Hostinger VPS for production use.
+This guide covers deploying the Enmirex Homes website to Google Cloud Platform e2 micro VM instance with your static IP and Squarespace domain.
 
 ## Prerequisites
 
-- **Hostinger VPS hosting** (minimum KVM1 plan at $4.99/month)
-- **Domain name** (enmirex.com) configured to point to your VPS IP
-- **SSL certificate** for HTTPS
+- **Google Cloud Platform account** with billing enabled
+- **e2 micro VM instance** created with static IP
+- **Squarespace domain** (enmirex.com) to be pointed to GCP static IP
+- **SSH access** to your GCP VM instance
 - **Google Sheets API credentials** for lead capture
 
-## Server Requirements
+## GCP e2 Micro VM Specifications
 
-- **OS**: Ubuntu 22.04 or 24.04 LTS
-- **Node.js**: Version 18 or higher
-- **RAM**: Minimum 1GB (2GB recommended)
-- **Storage**: Minimum 20GB
-- **Network**: 1Gbps port speed
+- **CPU**: 1 vCPU (shared)
+- **RAM**: 1 GB
+- **Storage**: 10 GB persistent disk
+- **Network**: Static external IP address
+- **OS**: Ubuntu 22.04 LTS (recommended)
 
-## Quick Deployment (Recommended)
+## Quick Deployment Process
 
-### 1. Server Setup
+### 1. GCP VM Instance Setup
+
+#### Create and Configure VM Instance
 
 ```bash
-# Connect to your VPS via SSH
-ssh root@your-server-ip
+# Connect to your GCP VM via SSH from GCP Console or:
+gcloud compute ssh your-vm-instance-name --zone=your-zone
 
-# Update system packages
-apt update && apt upgrade -y
+# Or use SSH directly with your static IP:
+ssh username@YOUR_STATIC_IP
+```
 
-# Install Node.js 18
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-apt-get install -y nodejs
+#### Run Initial Setup Script
 
-# Install Nginx
-apt install nginx -y
-
-# Install PM2 globally
-npm install -g pm2
-
-# Create application directory
-mkdir -p /var/www/enmirex-homes
-cd /var/www/enmirex-homes
+```bash
+# Download and run the GCP setup script (replace with your actual repo URL)
+# wget https://raw.githubusercontent.com/your-username/enmirex-homes/main/gcp-startup-script.sh
+# For now, copy the script content from your project
+chmod +x gcp-startup-script.sh
+./gcp-startup-script.sh
 ```
 
 ### 2. Deploy Application
 
-```bash
-# Clone or upload your application files to /var/www/enmirex-homes
-# Then run the deployment script:
+#### Clone and Setup Application
 
+```bash
+# Navigate to application directory
+cd /var/www/enmirex-homes
+
+# Clone your repository (replace with your actual repo URL)
+git clone https://github.com/your-username/enmirex-homes.git .
+
+# Make deployment script executable
 chmod +x deploy.sh
+
+# Run deployment
 ./deploy.sh
 ```
 
-### 3. Configure Environment Variables
+#### Configure Environment Variables
 
 ```bash
-# Copy and edit the environment file
+# Copy and edit environment file
 cp .env.production.example .env
 nano .env
 ```
@@ -65,252 +72,351 @@ Set the following required variables:
 ```env
 NODE_ENV=production
 PORT=3000
-GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com
+GOOGLE_SERVICE_ACCOUNT_EMAIL=enmirexaigooglesheets@wholesaleleadsenmirex.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
-GOOGLE_SHEET_ID=your_sheet_id_here
+GOOGLE_SHEET_ID=1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs
 SESSION_SECRET=your-secure-random-string-here
-CORS_ORIGIN=https://yourdomain.com
+CORS_ORIGIN=https://enmirex.com
 TRUST_PROXY=true
 ```
 
-### 4. Configure Nginx
+### 3. Configure Nginx
+
+#### Install and Configure Nginx
 
 ```bash
 # Copy Nginx configuration
-cp nginx.conf.example /etc/nginx/sites-available/enmirex-homes
+sudo cp nginx.conf.example /etc/nginx/sites-available/enmirex-homes
 
-# Edit the configuration with your domain (enmirex.com)
-nano /etc/nginx/sites-available/enmirex-homes
+# Edit with your static IP and domain
+sudo nano /etc/nginx/sites-available/enmirex-homes
 
 # Enable the site
-ln -s /etc/nginx/sites-available/enmirex-homes /etc/nginx/sites-enabled/
-rm /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/enmirex-homes /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
 
-# Test and reload Nginx
-nginx -t
-systemctl reload nginx
+# Add rate limiting to main nginx.conf
+sudo nano /etc/nginx/nginx.conf
 ```
 
-### 5. SSL Certificate Setup
+Add this line inside the `http {}` block in `/etc/nginx/nginx.conf`:
+```nginx
+limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+```
+
+```bash
+# Test and reload Nginx
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+### 4. SSL Certificate Setup
 
 ```bash
 # Install Certbot
-apt install certbot python3-certbot-nginx -y
+sudo apt install certbot python3-certbot-nginx -y
 
-# Get SSL certificate
-certbot --nginx -d enmirex.com -d www.enmirex.com
+# Get SSL certificate for your domain
+sudo certbot --nginx -d enmirex.com -d www.enmirex.com
 
-# Auto-renewal test
-certbot renew --dry-run
+# Test auto-renewal
+sudo certbot renew --dry-run
 ```
 
-### 6. Firewall Configuration
+### 5. GCP Firewall Configuration
+
+#### Configure GCP Firewall Rules
 
 ```bash
-# Configure UFW firewall
-ufw allow ssh
-ufw allow 'Nginx Full'
-ufw --force enable
+# Allow HTTP traffic (if not already enabled)
+gcloud compute firewall-rules create allow-http \
+    --allow tcp:80 \
+    --source-ranges 0.0.0.0/0 \
+    --description "Allow HTTP traffic"
+
+# Allow HTTPS traffic (if not already enabled)
+gcloud compute firewall-rules create allow-https \
+    --allow tcp:443 \
+    --source-ranges 0.0.0.0/0 \
+    --description "Allow HTTPS traffic"
 ```
 
-## Manual Deployment Steps
+Or configure via GCP Console:
+1. Go to VPC Network → Firewall
+2. Ensure rules exist for ports 80 and 443
+3. Apply to your VM instance
 
-If you prefer manual setup instead of using the deployment script:
+### 6. Squarespace Domain Configuration
 
-### 1. Build Application
+#### Point Domain to GCP Static IP
+
+1. **Log into Squarespace**:
+   - Go to Settings → Domains
+   - Click on enmirex.com
+
+2. **Configure DNS Settings**:
+   - Click "Use Custom DNS"
+   - Add these A records:
+     ```
+     @ (root) → YOUR_GCP_STATIC_IP
+     www → YOUR_GCP_STATIC_IP
+     ```
+
+3. **Wait for DNS Propagation** (can take 24-48 hours)
+
+4. **Verify DNS**:
+   ```bash
+   # Check if domain points to your IP
+   nslookup enmirex.com
+   nslookup www.enmirex.com
+   ```
+
+## Alternative: Docker Deployment (Memory Optimized for e2 micro)
+
+For containerized deployment on GCP with proper memory limits:
+
+### 1. Install Docker
 
 ```bash
-# Install dependencies (including dev dependencies for build)
-npm ci
+# Install Docker
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt update
+sudo apt install docker-ce docker-compose-plugin
 
-# Build for production
-NODE_ENV=production npm run build
-
-# Prune dev dependencies after build
-npm prune --production
+# Add user to docker group
+sudo usermod -aG docker $USER
 ```
 
-### 2. Start with PM2
+### 2. Deploy with Docker
 
 ```bash
-# Start application
-pm2 start ecosystem.config.js --env production
+# Navigate to application directory
+cd /var/www/enmirex-homes
 
-# Save PM2 configuration
-pm2 save
+# Copy environment file
+cp .env.production.example .env
+nano .env  # Edit with your values
 
-# Setup PM2 startup script
-pm2 startup
-# Follow the instructions to complete startup configuration
+# Build and start with Docker Compose
+docker compose up -d
+
+# Check status
+docker compose ps
+docker compose logs
 ```
-
-## Docker Deployment (Alternative)
-
-For containerized deployment:
-
-```bash
-# Build and run with Docker Compose
-docker-compose up -d
-
-# Or build and run manually
-docker build -t enmirex-homes .
-docker run -d -p 3000:3000 --env-file .env --name enmirex-homes enmirex-homes
-```
-
-## Google Sheets API Setup
-
-### 1. Create Google Service Account
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing one
-3. Enable Google Sheets API
-4. Create Service Account credentials
-5. Download the JSON key file
-
-### 2. Configure Google Sheet
-
-1. Create a Google Sheet for leads
-2. Share the sheet with your service account email (with edit permissions)
-3. Copy the sheet ID from the URL
-4. Set the sheet ID in your .env file
-
-### 3. Set Environment Variables
-
-From the service account JSON file, extract:
-- `client_email` → `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-- `private_key` → `GOOGLE_PRIVATE_KEY`
-- Google Sheet ID → `GOOGLE_SHEET_ID`
 
 ## Monitoring and Maintenance
 
 ### Application Monitoring
 
 ```bash
-# Check application status
+# Check PM2 status
 pm2 status
 
-# View logs
+# View application logs
 pm2 logs enmirex-homes
 
 # Restart application
 pm2 restart enmirex-homes
 
-# Monitor in real-time
-pm2 monit
+# Monitor system resources (important for e2 micro)
+top
+free -h
+df -h
 ```
 
 ### Health Checks
 
 ```bash
-# Test application health
+# Test application locally
 curl http://localhost:3000/api/health
 
 # Test from external
 curl https://enmirex.com/api/health
+
+# Check if domain resolves correctly
+dig enmirex.com
 ```
 
 ### Log Management
 
 ```bash
 # View application logs
-tail -f logs/combined.log
+tail -f /var/www/enmirex-homes/logs/combined.log
 
 # View Nginx logs
-tail -f /var/log/nginx/access.log
-tail -f /var/log/nginx/error.log
+sudo tail -f /var/log/nginx/access.log
+sudo tail -f /var/log/nginx/error.log
+
+# Check PM2 logs
+pm2 logs --lines 100
+```
+
+## e2 Micro VM Optimizations
+
+### Memory Management
+
+The e2 micro VM has limited memory (1GB). These optimizations help:
+
+```bash
+# Monitor memory usage
+free -h
+htop
+
+# Check swap usage
+swapon --show
+
+# Clear system cache if needed (emergency only)
+sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
+```
+
+### Performance Optimizations
+
+1. **PM2 Configuration**: Already optimized for 512MB max memory
+2. **Nginx Optimization**: Configured with efficient worker settings
+3. **Swap File**: 1GB swap file created during setup
+4. **System Tuning**: Optimized vm.swappiness and overcommit settings
+
+### Troubleshooting Common Issues
+
+#### 1. Out of Memory Errors
+
+```bash
+# Check memory usage
+free -h
+ps aux --sort=-%mem | head
+
+# Restart application if needed
+pm2 restart enmirex-homes
+
+# Check for memory leaks in logs
+pm2 logs enmirex-homes | grep -i memory
+```
+
+#### 2. Application Won't Start
+
+```bash
+# Check PM2 status
+pm2 status
+
+# View detailed logs
+pm2 logs enmirex-homes --lines 50
+
+# Test environment variables
+node -e "console.log(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL)"
+```
+
+#### 3. Nginx Configuration Issues
+
+```bash
+# Test Nginx configuration
+sudo nginx -t
+
+# Check Nginx status
+sudo systemctl status nginx
+
+# Restart Nginx
+sudo systemctl restart nginx
+```
+
+#### 4. SSL Certificate Issues
+
+```bash
+# Check certificate status
+sudo certbot certificates
+
+# Renew certificates manually
+sudo certbot renew
+
+# Check certificate expiry
+openssl x509 -in /etc/letsencrypt/live/enmirex.com/cert.pem -text -noout
 ```
 
 ## Security Considerations
 
-### 1. Server Security
-- Keep system packages updated
-- Configure proper firewall rules
-- Use SSH keys instead of passwords
-- Regular security audits
+### GCP Security Best Practices
 
-### 2. Application Security
-- Secure environment variables
-- Regular dependency updates
-- Monitor for vulnerabilities
-- Backup Google Sheets data
+1. **Firewall Rules**: Only allow necessary ports (80, 443, SSH)
+2. **SSH Security**: Use SSH keys instead of passwords
+3. **Regular Updates**: Keep system packages updated
+4. **Environment Variables**: Secure API keys and secrets
+5. **Nginx Security**: Security headers and rate limiting configured
 
-### 3. SSL/TLS
-- Use strong SSL configuration
-- Regular certificate renewal
-- HTTP to HTTPS redirects
-- Security headers implemented
+### Application Security
 
-## Performance Optimization
+1. **HTTPS Only**: Force HTTPS redirects
+2. **Security Headers**: CSP, HSTS, X-Frame-Options configured
+3. **Rate Limiting**: API endpoints protected
+4. **Input Validation**: Form inputs validated with Zod
+5. **Secret Management**: Environment variables for sensitive data
 
-### 1. Nginx Optimization
-- Gzip compression enabled
-- Static file caching
-- Proper proxy settings
-- Rate limiting configured
+## Cost Optimization
 
-### 2. Application Optimization
-- Production build minification
-- Security middleware
-- Request rate limiting
-- Health check endpoints
+### GCP e2 Micro Instance Costs
 
-## Troubleshooting
+- **e2 micro**: ~$6-7/month (with sustained use discounts)
+- **Static IP**: ~$3-4/month (when attached to running instance)
+- **Storage**: ~$0.40/month for 10GB standard persistent disk
+- **Network**: Minimal costs for normal website traffic
 
-### Common Issues
+### Cost Monitoring
 
-1. **Application won't start**
-   ```bash
-   # Check logs
-   pm2 logs enmirex-homes
-   
-   # Verify environment variables
-   cat .env
-   
-   # Test Google Sheets connection
-   curl -X POST http://localhost:3000/api/leads -H "Content-Type: application/json" -d '{"test": "data"}'
-   ```
+```bash
+# Monitor resource usage
+gcloud compute instances describe your-vm-name --zone=your-zone
 
-2. **502 Bad Gateway**
-   ```bash
-   # Check if application is running
-   pm2 status
-   
-   # Check Nginx configuration
-   nginx -t
-   
-   # Restart services
-   pm2 restart enmirex-homes
-   systemctl restart nginx
-   ```
+# Check billing in GCP Console
+# Billing → Reports → View your costs
+```
 
-3. **SSL Certificate Issues**
-   ```bash
-   # Renew certificate
-   certbot renew
-   
-   # Check certificate status
-   certbot certificates
-   ```
+## Backup and Recovery
 
-### Contact Support
+### Application Backup
 
-For Hostinger VPS specific issues:
-- Use Hostinger's 24/7 support chat
-- Check VPS management panel
-- Review server logs via control panel
+```bash
+# Create backup script
+cat > backup.sh << 'EOF'
+#!/bin/bash
+DATE=$(date +"%Y%m%d_%H%M%S")
+BACKUP_DIR="/home/$USER/backups"
+mkdir -p $BACKUP_DIR
 
-## Cost Breakdown
+# Backup application files
+tar -czf $BACKUP_DIR/enmirex-app-$DATE.tar.gz /var/www/enmirex-homes
 
-### Hostinger VPS Pricing
-- **KVM1**: $4.99/month (1GB RAM, 1 vCPU, 20GB storage) - Minimum
-- **KVM2**: $7-9/month (2GB RAM, 1 vCPU, 40GB storage) - Recommended
-- **KVM4**: $14-17/month (4GB RAM, 2 vCPUs, 80GB storage) - High traffic
+# Backup environment file
+cp /var/www/enmirex-homes/.env $BACKUP_DIR/env-$DATE.backup
 
-### Additional Costs
-- Domain name: $10-15/year
-- SSL certificate: Free with Let's Encrypt
-- Backup services: Optional
+# Keep only last 5 backups
+cd $BACKUP_DIR && ls -t *.tar.gz | tail -n +6 | xargs -r rm
+EOF
+
+chmod +x backup.sh
+```
+
+### VM Snapshot
+
+Create regular snapshots via GCP Console:
+1. Compute Engine → Snapshots
+2. Create Snapshot
+3. Select your VM disk
+4. Schedule regular snapshots
 
 ## Conclusion
 
-This deployment setup provides a robust, secure, and scalable solution for hosting the Enmirex Homes website on Hostinger VPS. The configuration includes production-grade security, monitoring, and performance optimizations suitable for a real estate lead generation business.
+Your Enmirex Homes website is now deployed on Google Cloud Platform e2 micro VM with:
+
+- ✅ **Production-ready configuration** for e2 micro VM constraints
+- ✅ **Static IP** assigned and configured
+- ✅ **Squarespace domain** pointing to GCP infrastructure
+- ✅ **SSL certificate** with automatic renewal
+- ✅ **Google Sheets integration** for lead capture
+- ✅ **Performance optimization** for limited resources
+- ✅ **Security hardening** with proper headers and rate limiting
+- ✅ **Monitoring and logging** setup
+- ✅ **Cost-effective hosting** solution
+
+The application maintains all original functionality while being optimized for GCP's e2 micro VM instance limitations. Your lead generation forms will continue to work seamlessly with Google Sheets integration.
