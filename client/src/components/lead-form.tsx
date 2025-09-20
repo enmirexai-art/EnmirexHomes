@@ -244,7 +244,7 @@ export default function LeadForm() {
                       type="tel"
                       value={formData.phoneNumber}
                       onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
-                      placeholder="(555) 123-4567"
+                      placeholder="(469) 730-6711"
                       required
                       className="h-11 sm:h-12 text-base"
                       data-testid="input-phone-number"

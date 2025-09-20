@@ -43,9 +43,9 @@ export default function HeroSection() {
                 asChild
                 className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-white hover:text-primary transition-colors w-full sm:w-auto"
               >
-                <a href="tel:(555) 123-4567" className="flex items-center justify-center">
+                <a href="tel:(469) 730-6711" className="flex items-center justify-center">
                   <Phone className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                  <span className="hidden xs:inline">Call </span>(555) 123-4567
+                  <span className="hidden xs:inline">Call </span>(469) 730-6711
                 </a>
               </Button>
             </div>
