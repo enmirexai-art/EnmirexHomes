@@ -55,7 +55,7 @@ pm2 stop enmirex-homes || echo "No existing process to stop"
 
 # Start the application with PM2
 echo "🚀 Starting application with PM2..."
-pm2 start ecosystem.config.js --env production
+pm2 start ecosystem.config.cjs --env production
 
 # Save PM2 configuration
 pm2 save
@@ -70,11 +70,11 @@ echo "1. Configure Nginx reverse proxy (see nginx.conf.example)"
 echo "2. Setup SSL certificate"
 echo "3. Configure firewall to allow ports 80 and 443"
 echo "4. Verify .env file has correct values"
-echo "5. Test the application: curl http://localhost:3000"
+echo "5. Test the application: curl http://localhost:${APP_PORT:-3000}"
 echo ""
 echo "📊 Monitor application:"
 echo "- View logs: pm2 logs enmirex-homes"
 echo "- Monitor status: pm2 status"
 echo "- Restart: pm2 restart enmirex-homes"
 echo ""
-echo "🌐 Application should be running on port 3000"
+echo "🌐 Application should be running on port ${APP_PORT:-3000}"

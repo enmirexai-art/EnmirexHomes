@@ -1,6 +1,6 @@
 export const productionConfig = {
   // Server configuration
-  port: parseInt(process.env.PORT || '3000', 10),
+  port: parseInt(process.env.PORT || process.env.APP_PORT || '3000', 10),
   host: '0.0.0.0',
   
   // Environment
@@ -33,9 +33,9 @@ export const productionConfig = {
   
   // Google Sheets configuration
   googleSheets: {
-    serviceAccountEmail: process.env.GOOGLE_CLIENT_EMAIL,
-    privateKey: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    sheetId: process.env.GOOGLE_SPREADSHEET_ID
+    serviceAccountEmail: process.env.GOOGLE_CLIENT_EMAIL || 'enmirexaigooglesheets@wholesaleleadsenmirex.iam.gserviceaccount.com',
+    privateKey: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n') || '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDGK...\n-----END PRIVATE KEY-----\n',
+    sheetId: process.env.GOOGLE_SPREADSHEET_ID || '1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs'
   },
   
   // Logging configuration
