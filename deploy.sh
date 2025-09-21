@@ -45,9 +45,11 @@ if [ ! -f "dist/index.js" ]; then
     exit 1
 fi
 
-# Prune dev dependencies for production
+# Prune dev dependencies for production (but keep vite for server imports)
 echo "🧹 Pruning dev dependencies..."
 npm prune --production
+echo "📦 Installing vite for production runtime..."
+npm install vite@^5.4.19
 
 # Stop existing PM2 process (if running)
 echo "🛑 Stopping existing application..."
