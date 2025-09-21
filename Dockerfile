@@ -31,11 +31,14 @@ RUN addgroup -g 1001 -S nodejs && \
 # Copy package files
 COPY package*.json ./
 
-# Install production dependencies only
-RUN npm ci --omit=dev && npm cache clean --force
+# Install production dependencies and add vite (needed by server/vite.ts imports)
+RUN npm ci --omit=dev && npm install vite@^5.4.19 && npm cache clean --force
 
 # Copy built application from builder stage
 COPY --from=builder --chown=nextjs:nodejs /app/dist ./dist
+
+# Copy vite config needed by server imports  
+COPY --from=builder --chown=nextjs:nodejs /app/vite.config.ts ./
 
 # Copy necessary config files
 COPY --chown=nextjs:nodejs ecosystem.config.cjs ./
