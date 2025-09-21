@@ -18,7 +18,23 @@ This guide covers deploying the Enmirex Homes website to Google Cloud Platform e
 - **Network**: Static external IP address
 - **OS**: Ubuntu 22.04 LTS (recommended)
 
-## Quick Deployment Process
+## Deployment Methods
+
+This guide covers three deployment methods for the Enmirex Homes application:
+
+1. **Automated Script Deployment** (Recommended for production)
+2. **Manual Deployment** (For development and testing)
+3. **Docker Deployment** (For containerized environments)
+
+Choose the method that best fits your environment and requirements.
+
+---
+
+## Method 1: Automated Script Deployment (Recommended)
+
+This is the recommended approach for production deployments on GCP e2 micro VMs.
+
+### Quick Deployment Process
 
 ### 1. GCP VM Instance Setup
 
@@ -123,6 +139,86 @@ sudo certbot --nginx -d enmirex.com -d www.enmirex.com
 sudo certbot renew --dry-run
 ```
 
+---
+
+## Method 2: Manual Deployment
+
+For development environments or when you need more control over the deployment process.
+
+### Prerequisites
+- Node.js 18+ installed
+- PM2 installed globally: `npm install -g pm2`
+- Nginx installed and configured
+
+### Step-by-Step Manual Deployment
+
+#### 1. Clone Repository
+```bash
+git clone https://github.com/your-username/enmirex-homes.git
+cd enmirex-homes
+```
+
+#### 2. Install Dependencies
+```bash
+# Install all dependencies (including dev dependencies for build)
+npm ci
+```
+
+#### 3. Configure Environment
+```bash
+# Copy environment template
+cp .env.production.example .env
+
+# Edit environment variables
+nano .env
+```
+
+Set the following required variables:
+```env
+NODE_ENV=production
+APP_PORT=3000
+GOOGLE_CLIENT_EMAIL=your-email@yourproject.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
+GOOGLE_SPREADSHEET_ID=your-spreadsheet-id
+SESSION_SECRET=your-secure-random-string-here
+CORS_ORIGIN=https://yourdomain.com
+TRUST_PROXY=true
+```
+
+#### 4. Build Application
+```bash
+npm run build
+```
+
+#### 5. Install Production Dependencies Only
+```bash
+# Remove dev dependencies for production
+npm prune --production
+```
+
+#### 6. Start with PM2
+```bash
+# Start application
+pm2 start ecosystem.config.cjs --env production
+
+# Save PM2 configuration
+pm2 save
+
+# Setup startup script
+pm2 startup
+```
+
+#### 7. Verify Deployment
+```bash
+# Check application status
+pm2 status
+
+# Test health endpoint
+curl http://localhost:${APP_PORT:-3000}/api/health
+```
+
+---
+
 ### 5. GCP Firewall Configuration
 
 #### Configure GCP Firewall Rules
@@ -171,7 +267,11 @@ Or configure via GCP Console:
    nslookup www.enmirex.com
    ```
 
-## Alternative: Docker Deployment (Memory Optimized for e2 micro)
+---
+
+## Method 3: Docker Deployment (Containerized)
+
+Best for containerized environments and consistent deployments across different systems. Memory optimized for e2 micro VMs.
 
 For containerized deployment on GCP with proper memory limits:
 
@@ -192,21 +292,71 @@ sudo usermod -aG docker $USER
 
 ### 2. Deploy with Docker
 
+#### Prepare Environment
 ```bash
-# Navigate to application directory
-cd /var/www/enmirex-homes
+# Clone repository (if not already done)
+git clone https://github.com/your-username/enmirex-homes.git
+cd enmirex-homes
 
-# Copy environment file
+# Create environment file
 cp .env.production.example .env
-nano .env  # Edit with your values
+```
 
-# Build and start with Docker Compose
+#### Configure Environment Variables
+Edit `.env` file with your production values:
+```env
+NODE_ENV=production
+APP_PORT=3000
+GOOGLE_CLIENT_EMAIL=your-email@yourproject.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
+GOOGLE_SPREADSHEET_ID=your-spreadsheet-id
+SESSION_SECRET=your-secure-random-string-here
+CORS_ORIGIN=https://yourdomain.com
+TRUST_PROXY=true
+```
+
+#### Build and Start with Docker Compose
+```bash
+# Build and start all services
 docker compose up -d
 
-# Check status
+# View logs
+docker compose logs -f
+
+# Check container status
 docker compose ps
-docker compose logs
 ```
+
+#### Health Check and Verification
+```bash
+# Test application health
+curl http://localhost:${APP_PORT:-3000}/api/health
+
+# Test via nginx proxy
+curl http://localhost:80
+```
+
+#### Docker Management Commands
+```bash
+# Stop services
+docker compose down
+
+# Rebuild after changes
+docker compose up -d --build
+
+# View application logs only
+docker compose logs enmirex-homes
+
+# Access container shell
+docker compose exec enmirex-homes sh
+```
+
+### Docker Production Notes
+- The application runs as a non-root user (nextjs) for security
+- Memory is limited to 512MB with 256MB reservation
+- Health checks are configured with 30-second intervals
+- Logs are persistent via volume mounts
+- Nginx proxy is included for production-ready setup
 
 ## Monitoring and Maintenance
 
