@@ -40,8 +40,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/dist ./dist
 # Copy vite config needed by server imports  
 COPY --from=builder --chown=nextjs:nodejs /app/vite.config.ts ./
 
-# Copy necessary config files
-COPY --chown=nextjs:nodejs ecosystem.config.cjs ./
+# Copy necessary config files to dist directory
+COPY --chown=nextjs:nodejs ecosystem.config.cjs ./dist/
+
+# Change working directory to dist so import.meta.dirname resolves correctly
+WORKDIR /app/dist
 
 # Create logs directory
 RUN mkdir -p logs && chown nextjs:nodejs logs
@@ -56,5 +59,5 @@ EXPOSE ${APP_PORT:-3000}
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD node -e "const http = require('http'); const options = { host: 'localhost', port: process.env.APP_PORT || 3000, path: '/api/health', timeout: 2000 }; const req = http.request(options, (res) => { console.log('Health check passed'); process.exit(0); }); req.on('error', () => { console.log('Health check failed'); process.exit(1); }); req.end();"
 
-# Start command
-CMD ["node", "dist/index.js"]
+# Start command (from /app/dist directory)
+CMD ["node", "index.js"]
