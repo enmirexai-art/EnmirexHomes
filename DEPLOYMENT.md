@@ -87,7 +87,7 @@ nano .env
 Set the following required variables:
 ```env
 NODE_ENV=production
-PORT=3000
+APP_PORT=3000
 GOOGLE_CLIENT_EMAIL=enmirexaigooglesheets@wholesaleleadsenmirex.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
 GOOGLE_SPREADSHEET_ID=1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs
