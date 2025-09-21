@@ -51,12 +51,33 @@ echo 'vm.overcommit_memory=1' | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
 # Create swap file for e2 micro (since it has limited RAM)
-echo "💾 Creating swap file..."
-sudo fallocate -l 1G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+echo "💾 Setting up swap file..."
+
+# Check if swap file already exists and is active
+if swapon --show | grep -q '/swapfile'; then
+    echo "ℹ️  Swapfile already active, skipping creation"
+elif [ -f /swapfile ]; then
+    echo "⚠️  Existing swapfile found, removing and recreating..."
+    sudo swapoff /swapfile 2>/dev/null || true
+    sudo rm -f /swapfile
+fi
+
+# Create new swapfile if it doesn't exist
+if [ ! -f /swapfile ]; then
+    echo "📄 Creating new 1GB swapfile..."
+    sudo fallocate -l 1G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    
+    # Add to fstab if not already present
+    if ! grep -q '/swapfile' /etc/fstab; then
+        echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+    fi
+    echo "✅ Swapfile created and activated"
+else
+    echo "✅ Swapfile already configured"
+fi
 
 echo "✅ GCP e2 micro VM setup completed!"
 echo ""
