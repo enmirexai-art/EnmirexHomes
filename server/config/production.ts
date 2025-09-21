@@ -33,9 +33,9 @@ export const productionConfig = {
   
   // Google Sheets configuration
   googleSheets: {
-    serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    serviceAccountEmail: process.env.GOOGLE_CLIENT_EMAIL,
     privateKey: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    sheetId: process.env.GOOGLE_SHEET_ID
+    sheetId: process.env.GOOGLE_SPREADSHEET_ID
   },
   
   // Logging configuration
@@ -49,7 +49,7 @@ export function validateProductionConfig() {
   const errors: string[] = [];
   
   if (!productionConfig.googleSheets.serviceAccountEmail) {
-    errors.push('GOOGLE_SERVICE_ACCOUNT_EMAIL is required');
+    errors.push('GOOGLE_CLIENT_EMAIL is required');
   }
   
   if (!productionConfig.googleSheets.privateKey) {
@@ -57,7 +57,7 @@ export function validateProductionConfig() {
   }
   
   if (!productionConfig.googleSheets.sheetId) {
-    errors.push('GOOGLE_SHEET_ID is required');
+    errors.push('GOOGLE_SPREADSHEET_ID is required');
   }
   
   if (productionConfig.session.secret === 'default-secret-change-in-production') {

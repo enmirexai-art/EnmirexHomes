@@ -22,7 +22,7 @@ Preferred communication style: Simple, everyday language.
 - **Change**: Successfully integrated Google Sheets API for lead capture
 - **Details**:
   - Connected to specific Google Spreadsheet (ID: 1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs)
-  - Configured Google service account credentials via Replit Secrets
+  - Configured Google service account credentials via Replit Secrets (using GOOGLE_CLIENT_EMAIL and GOOGLE_SPREADSHEET_ID)
   - All form submissions automatically save to spreadsheet with comprehensive lead data
   - Tested and verified working integration
 

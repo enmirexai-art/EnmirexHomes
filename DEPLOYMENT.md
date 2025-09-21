@@ -72,9 +72,9 @@ Set the following required variables:
 ```env
 NODE_ENV=production
 PORT=3000
-GOOGLE_SERVICE_ACCOUNT_EMAIL=enmirexaigooglesheets@wholesaleleadsenmirex.iam.gserviceaccount.com
+GOOGLE_CLIENT_EMAIL=enmirexaigooglesheets@wholesaleleadsenmirex.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
-GOOGLE_SHEET_ID=1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs
+GOOGLE_SPREADSHEET_ID=1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs
 SESSION_SECRET=your-secure-random-string-here
 CORS_ORIGIN=https://enmirex.com
 TRUST_PROXY=true
