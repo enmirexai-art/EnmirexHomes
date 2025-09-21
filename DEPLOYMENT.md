@@ -567,6 +567,209 @@ Create regular snapshots via GCP Console:
 3. Select your VM disk
 4. Schedule regular snapshots
 
+## Debugging Guide
+
+### Automatic Deployment (Method 1) Debugging
+
+#### Check Deployment Status
+```bash
+# Check if the application is running
+curl http://localhost:${APP_PORT:-3000}/api/health
+
+# Expected response: {"status":"healthy","timestamp":"...","environment":"production"}
+```
+
+#### Check PM2 Status
+```bash
+# View PM2 process status
+pm2 status
+
+# View detailed logs
+pm2 logs enmirex-homes --lines 50
+
+# Check for errors in logs
+pm2 logs enmirex-homes | grep -i error
+
+# Restart if needed
+pm2 restart enmirex-homes
+
+# Check PM2 configuration
+pm2 describe enmirex-homes
+```
+
+#### Check Port Usage
+```bash
+# Check what's listening on your app port
+sudo ss -ltnp | grep :${APP_PORT:-3000}
+
+# Check if port is in use by another process
+sudo lsof -i :${APP_PORT:-3000}
+
+# Check all Node.js processes
+ps aux | grep node
+```
+
+#### Check Environment Variables
+```bash
+# Navigate to app directory
+cd /var/www/enmirex-homes
+
+# Check if .env file exists and has correct values
+ls -la .env
+cat .env
+
+# Test environment loading
+node -e "require('dotenv').config(); console.log('APP_PORT:', process.env.APP_PORT); console.log('GOOGLE_CLIENT_EMAIL:', process.env.GOOGLE_CLIENT_EMAIL ? 'SET' : 'MISSING');"
+```
+
+#### Check Nginx Configuration
+```bash
+# Test Nginx configuration
+sudo nginx -t
+
+# Check if Nginx is running
+sudo systemctl status nginx
+
+# Restart Nginx if needed
+sudo systemctl restart nginx
+
+# Check Nginx logs
+sudo tail -f /var/log/nginx/error.log
+sudo tail -f /var/log/nginx/access.log
+
+# Test proxy connection manually
+curl -v http://localhost/api/health
+```
+
+### Docker Deployment (Method 3) Debugging
+
+#### Check Container Status
+```bash
+# View all containers
+docker compose ps
+
+# Check container logs
+docker compose logs enmirex-homes
+docker compose logs nginx
+
+# Follow logs in real-time
+docker compose logs -f enmirex-homes
+
+# Check container health
+docker compose exec enmirex-homes curl http://localhost:3000/api/health
+```
+
+#### Inspect Docker Network
+```bash
+# Check Docker network connectivity
+docker compose exec nginx ping enmirex-homes
+
+# Test internal connectivity
+docker compose exec nginx curl http://enmirex-homes:3000/api/health
+
+# Check port mapping
+docker port enmirex-nginx
+```
+
+#### Fix Common Docker Issues
+```bash
+# Rebuild containers if needed
+docker compose down
+docker compose up -d --build
+
+# Check Docker resources
+docker system df
+docker system prune -f
+
+# View detailed container information
+docker compose exec enmirex-homes env
+docker compose exec enmirex-homes ps aux
+```
+
+### Manual Deployment (Method 2) Debugging
+
+#### Check Node.js Application
+```bash
+# Test application directly
+cd /path/to/your/app
+NODE_ENV=production node dist/index.js
+
+# Check build output
+ls -la dist/
+cat dist/index.js | head -20
+
+# Verify dependencies
+npm list --production
+```
+
+#### Database Connection (if used)
+```bash
+# Test database connectivity (if using PostgreSQL)
+# psql $DATABASE_URL -c "SELECT 1;"
+
+# Check environment variables
+echo $DATABASE_URL
+echo $GOOGLE_CLIENT_EMAIL
+```
+
+### Common Issues and Solutions
+
+#### Issue: "curl: (7) Failed to connect to localhost port 3000"
+**Solutions:**
+1. Check if app is running: `pm2 status` or `docker compose ps`
+2. Verify port configuration: `echo $APP_PORT` or check .env file
+3. Check firewall: `sudo ufw status`
+4. Test different port: `curl http://localhost:5000/api/health` (dev mode)
+
+#### Issue: "502 Bad Gateway nginx"
+**Solutions:**
+1. Check app health: `curl http://localhost:3000/api/health`
+2. Verify nginx config: `sudo nginx -t`
+3. Check nginx logs: `sudo tail -f /var/log/nginx/error.log`
+4. Restart services: `pm2 restart enmirex-homes && sudo systemctl restart nginx`
+
+#### Issue: Docker containers not starting
+**Solutions:**
+1. Check Docker logs: `docker compose logs`
+2. Verify .env file exists: `ls -la .env`
+3. Free up space: `docker system prune -f`
+4. Rebuild: `docker compose up -d --build`
+
+#### Issue: Environment variables not loaded
+**Solutions:**
+1. Check .env file format (no spaces around =)
+2. Verify file permissions: `ls -la .env`
+3. Restart application after changes
+4. Test loading: `node -e "require('dotenv').config(); console.log(process.env.APP_PORT);"`
+
+#### Issue: Google Sheets integration not working
+**Solutions:**
+1. Verify service account email: `echo $GOOGLE_CLIENT_EMAIL`
+2. Check private key format (should include \n for line breaks)
+3. Test API access: Check application logs for Google API errors
+4. Verify spreadsheet permissions for the service account
+
+### Performance Monitoring
+
+```bash
+# Check system resources
+free -h
+df -h
+htop
+
+# Monitor application memory usage
+pm2 monit
+
+# Check swap usage (GCP e2 micro)
+swapon --show
+
+# View system logs
+sudo journalctl -u nginx -f
+sudo journalctl -xe
+```
+
+---
+
 ## Conclusion
 
 Your Enmirex Homes website is now deployed on Google Cloud Platform e2 micro VM with:
