@@ -23,6 +23,7 @@ export class MemStorage implements IStorage {
       squareFootage: insertLead.squareFootage || null,
       propertyCondition: insertLead.propertyCondition || null,
       sellingReason: insertLead.sellingReason || null,
+      otherReason: insertLead.otherReason || null,
       additionalDetails: insertLead.additionalDetails || null,
       id,
       createdAt: new Date()
