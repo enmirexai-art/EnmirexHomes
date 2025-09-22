@@ -15,8 +15,8 @@ RUN npm ci && npm cache clean --force
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Make build script executable and build
+RUN chmod +x build-production.sh && ./build-production.sh
 
 # Production stage
 FROM node:18-alpine AS production
@@ -59,5 +59,6 @@ EXPOSE ${APP_PORT:-3000}
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD node -e "const http = require('http'); const options = { host: 'localhost', port: process.env.APP_PORT || 3000, path: '/api/health', timeout: 2000 }; const req = http.request(options, (res) => { console.log('Health check passed'); process.exit(0); }); req.on('error', () => { console.log('Health check failed'); process.exit(1); }); req.end();"
 
-# Start command (from /app/dist directory)
-CMD ["node", "index.js"]
+# Start command (from /app/dist directory) 
+# Unset PORT to avoid conflicts with APP_PORT
+CMD ["sh", "-c", "unset PORT && node index.js"]

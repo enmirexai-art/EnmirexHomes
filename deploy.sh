@@ -35,9 +35,9 @@ fi
 echo "📦 Installing dependencies..."
 npm ci
 
-# Build the application
+# Build the application with import.meta.dirname fix
 echo "🔨 Building the application..."
-npm run build
+./build-production.sh
 
 # Check if build was successful
 if [ ! -f "dist/index.js" ]; then
@@ -55,9 +55,15 @@ npm install vite@^5.4.19
 echo "🛑 Stopping existing application..."
 pm2 stop enmirex-homes || echo "No existing process to stop"
 
-# Start the application with PM2
+# Change to dist directory for proper path resolution
+cd dist
+
+# Clear PORT environment variable to avoid conflicts with APP_PORT
+unset PORT
+
+# Start the application with PM2 from dist directory
 echo "🚀 Starting application with PM2..."
-pm2 start ecosystem.config.cjs --env production
+pm2 start ../ecosystem.config.cjs --env production
 
 # Save PM2 configuration
 pm2 save
