@@ -37,7 +37,7 @@ npm ci
 
 # Build the application with import.meta.dirname fix
 echo "🔨 Building the application..."
-./build-production.sh
+sudo ./build-production.sh
 
 # Check if build was successful
 if [ ! -f "dist/index.js" ]; then
