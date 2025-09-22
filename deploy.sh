@@ -55,15 +55,12 @@ npm install vite@^5.4.19
 echo "🛑 Stopping existing application..."
 pm2 stop enmirex-homes || echo "No existing process to stop"
 
-# Change to dist directory for proper path resolution
-cd dist
-
 # Clear PORT environment variable to avoid conflicts with APP_PORT
 unset PORT
 
-# Start the application with PM2 from dist directory
+# Start the application with PM2 (ecosystem.config.cjs sets working directory to dist)
 echo "🚀 Starting application with PM2..."
-pm2 start ../ecosystem.config.cjs --env production
+pm2 start ecosystem.config.cjs --env production
 
 # Save PM2 configuration
 pm2 save

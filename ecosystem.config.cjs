@@ -1,7 +1,8 @@
 module.exports = {
   apps: [{
     name: 'enmirex-homes',
-    script: 'dist/index.js',
+    script: 'index.js',
+    cwd: './dist',  // Run from dist directory
     instances: 1,
     exec_mode: 'fork',
     watch: false,
