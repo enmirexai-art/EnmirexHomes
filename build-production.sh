@@ -17,17 +17,20 @@ npx esbuild server/index.ts \
   --outdir=dist \
   --define:import.meta.dirname='"."'
 
-echo "🔧 Fixing static path resolution..."
-# Replace the relative path resolution with absolute path using Node.js
+echo "🔧 Fixing static path resolution for ES modules..."
+# Fix path resolution for ES modules using import.meta.dirname
 node -e "
 const fs = require('fs');
 let content = fs.readFileSync('dist/index.js', 'utf8');
+
+// Replace the path resolution with import.meta.dirname (works in ES modules)
 content = content.replace(
   /path2\.resolve\(\"\.\", \"public\"\)/g, 
-  'path2.resolve(process.cwd(), \"public\")'
+  'path2.resolve(import.meta.dirname, \"public\")'
 );
+
 fs.writeFileSync('dist/index.js', content);
-console.log('✅ Path resolution fixed');
+console.log('✅ ES module path resolution fixed');
 "
 
 echo "✅ Production build completed successfully!"
