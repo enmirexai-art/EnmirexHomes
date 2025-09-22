@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import cors from "cors";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { setupSecurityMiddleware } from "./middleware/security";
@@ -87,7 +88,8 @@ app.use((req, res, next) => {
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
     // Serve built static assets even in development mode for production builds
-    const distPath = path.resolve(import.meta.dirname, "public");
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const distPath = path.resolve(__dirname, "public");
     if (fs.existsSync(distPath)) {
       app.use(express.static(distPath));
     }
