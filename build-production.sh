@@ -23,10 +23,29 @@ node -e "
 const fs = require('fs');
 let content = fs.readFileSync('dist/index.js', 'utf8');
 
-// Replace the path resolution with import.meta.url approach
+// Fix all path resolution issues with import.meta.dirname
+// Replace path2.resolve(\".\",...) with proper path resolution
 content = content.replace(
   /path2\.resolve\(\"\.\", \"public\"\)/g, 
   'path2.resolve(path2.dirname(new URL(import.meta.url).pathname), \"public\")'
+);
+
+// Fix path.resolve(import.meta.dirname, \"public\") pattern
+content = content.replace(
+  /path2\.resolve\(import\.meta\.dirname, \"public\"\)/g,
+  'path2.resolve(path2.dirname(new URL(import.meta.url).pathname), \"public\")'
+);
+
+// Fix path.resolve(import.meta.dirname, \"..\", \"client\", \"index.html\") pattern  
+content = content.replace(
+  /path2\.resolve\(\s*import\.meta\.dirname,\s*\"\.\.\",\s*\"client\",\s*\"index\.html\"\s*\)/g,
+  'path2.resolve(path2.dirname(new URL(import.meta.url).pathname), \"..\", \"client\", \"index.html\")'
+);
+
+// Fix any remaining import.meta.dirname references
+content = content.replace(
+  /import\.meta\.dirname/g,
+  'path2.dirname(new URL(import.meta.url).pathname)'
 );
 
 fs.writeFileSync('dist/index.js', content);
