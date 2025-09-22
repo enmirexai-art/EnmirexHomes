@@ -23,7 +23,7 @@ node -e "
 const fs = require('fs');
 let content = fs.readFileSync('dist/index.js', 'utf8');
 
-// Fix all path resolution issues with import.meta.dirname
+// Fix all path resolution issues with import.meta.dirname and vite config paths
 // Replace path2.resolve(\".\",...) with proper path resolution
 content = content.replace(
   /path2\.resolve\(\"\.\", \"public\"\)/g, 
@@ -40,6 +40,37 @@ content = content.replace(
 content = content.replace(
   /path2\.resolve\(\s*import\.meta\.dirname,\s*\"\.\.\",\s*\"client\",\s*\"index\.html\"\s*\)/g,
   'path2.resolve(path2.dirname(new URL(import.meta.url).pathname), \"..\", \"client\", \"index.html\")'
+);
+
+// Fix vite.config path.resolve patterns that got bundled (causing the Docker error)
+// Fix path.resolve(\".\", \"client\", \"src\") pattern from vite config
+content = content.replace(
+  /path\.resolve\(\"\.\", \"client\", \"src\"\)/g,
+  'path.resolve(path.dirname(new URL(import.meta.url).pathname), \"client\", \"src\")'
+);
+
+// Fix path.resolve(\".\", \"shared\") pattern from vite config
+content = content.replace(
+  /path\.resolve\(\"\.\", \"shared\"\)/g,
+  'path.resolve(path.dirname(new URL(import.meta.url).pathname), \"shared\")'
+);
+
+// Fix path.resolve(\".\", \"attached_assets\") pattern from vite config
+content = content.replace(
+  /path\.resolve\(\"\.\", \"attached_assets\"\)/g,
+  'path.resolve(path.dirname(new URL(import.meta.url).pathname), \"attached_assets\")'
+);
+
+// Fix path.resolve(\".\", \"client\") pattern from vite config
+content = content.replace(
+  /path\.resolve\(\"\.\", \"client\"\)/g,
+  'path.resolve(path.dirname(new URL(import.meta.url).pathname), \"client\")'
+);
+
+// Fix path.resolve(\".\", \"dist/public\") pattern from vite config
+content = content.replace(
+  /path\.resolve\(\"\.\", \"dist\/public\"\)/g,
+  'path.resolve(path.dirname(new URL(import.meta.url).pathname), \"dist/public\")'
 );
 
 // Fix any remaining import.meta.dirname references
