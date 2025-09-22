@@ -43,6 +43,12 @@ COPY --from=builder --chown=nextjs:nodejs /app/vite.config.ts ./
 # Copy necessary config files to dist directory
 COPY --chown=nextjs:nodejs ecosystem.config.cjs ./dist/
 
+# Copy environment template and generate secure session secret
+COPY --from=builder --chown=nextjs:nodejs /app/.env.production.example ./
+RUN SESSION_SECRET=$(node -e "console.log(require('crypto').randomBytes(64).toString('hex'))") && \
+    cp .env.production.example .env && \
+    sed -i "s/SESSION_SECRET=your_secure_session_secret_here/SESSION_SECRET=$SESSION_SECRET/" .env
+
 # Change working directory to dist so import.meta.dirname resolves correctly
 WORKDIR /app/dist
 
