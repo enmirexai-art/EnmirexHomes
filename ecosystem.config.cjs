@@ -1,4 +1,4 @@
-module.exports = {
+env produc  module.exports = {
   apps: [{
     name: 'enmirex-homes',
     script: 'index.js',
