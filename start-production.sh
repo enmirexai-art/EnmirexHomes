@@ -7,9 +7,9 @@ echo ""
 echo "🛑 Stopping development server..."
 pkill -f "tsx server/index.ts" 2>/dev/null || true
 
-# Make sure we have a fresh build
-echo "🔨 Building latest version..."
-npm run build
+# Make sure we have a fresh build with import.meta.dirname fixes
+echo "🔨 Building latest version with ES module fixes..."
+./build-production.sh
 
 # Start production server
 echo "🚀 Starting production server..."
