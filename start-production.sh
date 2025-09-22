@@ -18,4 +18,4 @@ echo "✅ CSS and JavaScript will work correctly"
 echo "✅ All security features enabled"
 echo ""
 
-NODE_ENV=production node dist/index.js
+PORT=5000 NODE_ENV=production node dist/index.js
