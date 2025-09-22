@@ -12,10 +12,10 @@ export function setupSecurityMiddleware(app: Express) {
     res.setHeader('X-XSS-Protection', '1; mode=block');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     
-    // Content Security Policy (always set for security)
+    // Content Security Policy (relaxed for React/Vite production)
     res.setHeader('Content-Security-Policy', [
       "default-src 'self'",
-      "script-src 'self'",
+      "script-src 'self' 'unsafe-eval'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
