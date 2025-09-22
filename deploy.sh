@@ -28,20 +28,6 @@ mkdir -p dist
 if [ ! -f ".env" ]; then
     echo "⚠️  Creating .env file from template..."
     cp .env.production.example .env
-    
-    # Generate secure session secret
-    SESSION_SECRET=$(node -e "console.log(require('crypto').randomBytes(64).toString('hex'))")
-    
-    # Replace placeholder with generated secret
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        # macOS
-        sed -i '' "s/SESSION_SECRET=your_secure_session_secret_here/SESSION_SECRET=$SESSION_SECRET/" .env
-    else
-        # Linux
-        sed -i "s/SESSION_SECRET=your_secure_session_secret_here/SESSION_SECRET=$SESSION_SECRET/" .env
-    fi
-    
-    echo "✅ Generated secure SESSION_SECRET"
     echo "🔧 Please edit .env file with your production values before running the application"
 fi
 

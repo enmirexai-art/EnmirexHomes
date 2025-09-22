@@ -91,7 +91,6 @@ APP_PORT=3000
 GOOGLE_CLIENT_EMAIL=enmirexaigooglesheets@wholesaleleadsenmirex.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
 GOOGLE_SPREADSHEET_ID=1s2t9t8rGJwbe1bM5Uj_mQ7FWV5rfqlICG34K6Wo4eWs
-SESSION_SECRET=your-secure-random-string-here
 CORS_ORIGIN=https://enmirex.com
 TRUST_PROXY=true
 ```
@@ -180,7 +179,7 @@ APP_PORT=3000
 GOOGLE_CLIENT_EMAIL=your-email@yourproject.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
 GOOGLE_SPREADSHEET_ID=your-spreadsheet-id
-SESSION_SECRET=your-secure-random-string-here
+
 CORS_ORIGIN=https://yourdomain.com
 TRUST_PROXY=true
 ```
@@ -322,7 +321,7 @@ APP_PORT=3000
 GOOGLE_CLIENT_EMAIL=your-email@yourproject.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Key-Here\n-----END PRIVATE KEY-----\n"
 GOOGLE_SPREADSHEET_ID=your-spreadsheet-id
-SESSION_SECRET=your-secure-random-string-here
+
 CORS_ORIGIN=https://yourdomain.com
 TRUST_PROXY=true
 ```
