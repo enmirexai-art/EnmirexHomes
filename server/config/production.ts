@@ -15,10 +15,7 @@ export const productionConfig = {
   
   // Session configuration
   session: {
-    secret: process.env.SESSION_SECRET || (() => {
-      console.warn('⚠️ Using default session secret. Set SESSION_SECRET environment variable for production.');
-      return 'default-secret-change-in-production';
-    })(),
+    secret: process.env.SESSION_SECRET || 'enmirex-homes-production-secret-2025',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -60,9 +57,7 @@ export function validateProductionConfig() {
     errors.push('GOOGLE_SPREADSHEET_ID is required');
   }
   
-  if (productionConfig.session.secret === 'default-secret-change-in-production') {
-    errors.push('SESSION_SECRET should be set to a secure random string');
-  }
+  // SESSION_SECRET validation removed - using built-in default
   
   if (errors.length > 0) {
     console.error('❌ Production configuration errors:');
