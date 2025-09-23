@@ -4,7 +4,6 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { registerRoutes } from "./routes";
-import { serveStatic } from "./vite";
 import { log } from "./logger";
 import { setupSecurityMiddleware } from "./middleware/security";
 import { productionConfig, validateProductionConfig } from "./config/production";
@@ -84,20 +83,35 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (process.env.NODE_ENV === "development") {
-    // Serve built static assets even in development mode for production builds
+  // Serve static files in production
+  if (process.env.NODE_ENV === "production") {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
     const distPath = path.resolve(__dirname, "public");
+    
     if (fs.existsSync(distPath)) {
       app.use(express.static(distPath));
+      
+      // Fall through to index.html for client-side routing
+      app.use("*", (_req, res) => {
+        res.sendFile(path.resolve(distPath, "index.html"));
+      });
+    } else {
+      log("Warning: Static files not found. Make sure to build the client first.");
     }
-    const { setupVite } = await import("./vite");
-    await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // In development, serve a simple message
+    app.use("*", (_req, res) => {
+      res.send(`
+        <html>
+          <head><title>Development Mode</title></head>
+          <body>
+            <h1>Development Mode</h1>
+            <p>This is a development server. For full functionality, run the client separately.</p>
+            <p>API endpoints are available at /api/*</p>
+          </body>
+        </html>
+      `);
+    });
   }
 
   // Use production configuration for port and host
