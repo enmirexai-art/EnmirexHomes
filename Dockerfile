@@ -44,8 +44,8 @@ COPY --chown=nextjs:nodejs ecosystem.config.cjs ./dist/
 COPY --from=builder --chown=nextjs:nodejs /app/.env.production.example ./
 RUN cp .env.production.example .env
 
-# Keep working directory at app root
-WORKDIR /app
+# Change working directory to dist so import.meta.dirname resolves correctly
+WORKDIR /app/dist
 
 # Create logs directory
 RUN mkdir -p logs && chown nextjs:nodejs logs
@@ -60,7 +60,6 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD node -e "const http = require('http'); const options = { host: 'localhost', port: process.env.APP_PORT || process.env.PORT || 3000, path: '/api/health', timeout: 2000 }; const req = http.request(options, (res) => { process.exit(res.statusCode === 200 ? 0 : 1); }); req.on('error', () => { process.exit(1); }); req.end();"
 
-# Start command
-ENV NODE_ENV=production
-ENV APP_PORT=3000
-CMD ["node", "dist/index.js"]
+# Start command (from /app/dist directory)
+# Unset PORT to avoid conflicts with APP_PORT
+CMD ["sh", "-c", "unset PORT && node index.js"]
