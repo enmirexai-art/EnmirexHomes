@@ -67,19 +67,19 @@ jobs:
             cd /home/enmirexai/enmirex-homes
             if [ ! -f .env ]; then
               echo "Creating default .env from example (edit after first run)"
-              cat > .env << 'EOF'
-              NODE_ENV=production
-              APP_PORT=3000
-              CORS_ORIGIN=https://enmirex.com
-              TRUST_PROXY=true
-              # GOOGLE_CLIENT_EMAIL=...
-              # GOOGLE_PRIVATE_KEY=...
-              # GOOGLE_SPREADSHEET_ID=...
-              # HTTPS domain
-              VIRTUAL_HOST=enmirex.com,www.enmirex.com
-              LETSENCRYPT_HOST=enmirex.com,www.enmirex.com
-              LETSENCRYPT_EMAIL=admin@enmirex.com
-              EOF
+              cat > .env << 'ENVEOF'
+NODE_ENV=production
+APP_PORT=3000
+CORS_ORIGIN=https://enmirex.com
+TRUST_PROXY=true
+# GOOGLE_CLIENT_EMAIL=...
+# GOOGLE_PRIVATE_KEY=...
+# GOOGLE_SPREADSHEET_ID=...
+# HTTPS domain
+VIRTUAL_HOST=enmirex.com,www.enmirex.com
+LETSENCRYPT_HOST=enmirex.com,www.enmirex.com
+LETSENCRYPT_EMAIL=admin@enmirex.com
+ENVEOF
             fi
             sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/enmirex-homes:${{ github.sha }}
