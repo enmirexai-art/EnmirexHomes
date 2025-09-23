@@ -18,11 +18,10 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: cd EnmirexHomes && npm ci
+        run: npm ci
 
       - name: Run smoke tests (Playwright)
         run: |
-          cd EnmirexHomes
           npx playwright install --with-deps
           npm run test:e2e
 
@@ -35,7 +34,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
-          context: ./EnmirexHomes
+          context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/enmirex-homes:latest,${{ secrets.DOCKERHUB_USERNAME }}/enmirex-homes:${{ github.sha }}
 
@@ -52,7 +51,7 @@ jobs:
           host: ${{ secrets.GCP_VM_IP }}
           username: ${{ secrets.GCP_VM_USER }}
           key: ${{ secrets.GCP_VM_SSH_PRIVATE_KEY }}
-          source: "EnmirexHomes/nginx-docker.conf"
+          source: "nginx-docker.conf"
           target: "/var/www/enmirex-homes/"
 
       - name: Deploy via SSH
