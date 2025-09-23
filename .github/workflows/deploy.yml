@@ -1,0 +1,120 @@
+name: Build and Deploy to GCP VM
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'EnmirexHomes/**'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: EnmirexHomes
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run smoke tests (Playwright)
+        run: |
+          npx playwright install --with-deps
+          npm run test:e2e
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./EnmirexHomes
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/enmirex-homes:latest,${{ secrets.DOCKERHUB_USERNAME }}/enmirex-homes:${{ github.sha }}
+
+  deploy-ssh:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy nginx config to VM
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.GCP_VM_IP }}
+          username: ${{ secrets.GCP_VM_USER }}
+          key: ${{ secrets.GCP_VM_SSH_PRIVATE_KEY }}
+          source: "EnmirexHomes/nginx-docker.conf"
+          target: "/var/www/enmirex-homes/"
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.GCP_VM_IP }}
+          username: ${{ secrets.GCP_VM_USER }}
+          key: ${{ secrets.GCP_VM_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            set -e
+            sudo mkdir -p /var/www/enmirex-homes
+            cd /var/www/enmirex-homes
+            if [ ! -f .env ]; then
+              echo "Creating default .env from example (edit after first run)"
+              cat > .env << 'EOF'
+NODE_ENV=production
+APP_PORT=3000
+CORS_ORIGIN=https://enmirex.com
+TRUST_PROXY=true
+# GOOGLE_CLIENT_EMAIL=...
+# GOOGLE_PRIVATE_KEY=...
+# GOOGLE_SPREADSHEET_ID=...
+# HTTPS domain
+VIRTUAL_HOST=enmirex.com,www.enmirex.com
+LETSENCRYPT_HOST=enmirex.com,www.enmirex.com
+LETSENCRYPT_EMAIL=admin@enmirex.com
+EOF
+            fi
+            sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/enmirex-homes:${{ github.sha }}
+            # Stop old stack
+            sudo docker rm -f nginx-proxy-acme || true
+            sudo docker rm -f nginx-proxy || true
+            sudo docker rm -f enmirex-homes || true
+            # Create required directories for certs
+            sudo mkdir -p /etc/nginx/certs /etc/nginx/vhost.d /usr/share/nginx/html
+            # Start reverse proxy
+            sudo docker run -d --name nginx-proxy --restart unless-stopped \
+              -p 80:80 -p 443:443 \
+              -v /etc/nginx/certs:/etc/nginx/certs \
+              -v /etc/nginx/vhost.d:/etc/nginx/vhost.d \
+              -v /usr/share/nginx/html:/usr/share/nginx/html \
+              -v /var/run/docker.sock:/tmp/docker.sock:ro \
+              nginxproxy/nginx-proxy:alpine
+            # Start ACME companion
+            sudo docker run -d --name nginx-proxy-acme --restart unless-stopped \
+              -e DEFAULT_EMAIL=$(grep '^LETSENCRYPT_EMAIL=' .env | cut -d'=' -f2-) \
+              -v /etc/nginx/certs:/etc/nginx/certs \
+              -v /etc/nginx/vhost.d:/etc/nginx/vhost.d \
+              -v /usr/share/nginx/html:/usr/share/nginx/html \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              nginxproxy/acme-companion
+            # Start app container behind proxy (expose only internal port)
+            sudo docker run -d --name enmirex-homes --restart unless-stopped \
+              --env-file /var/www/enmirex-homes/.env \
+              -e VIRTUAL_HOST=$(grep '^VIRTUAL_HOST=' .env | cut -d'=' -f2-) \
+              -e LETSENCRYPT_HOST=$(grep '^LETSENCRYPT_HOST=' .env | cut -d'=' -f2-) \
+              -e LETSENCRYPT_EMAIL=$(grep '^LETSENCRYPT_EMAIL=' .env | cut -d'=' -f2-) \
+              --expose 3000 \
+              ${{ secrets.DOCKERHUB_USERNAME }}/enmirex-homes:${{ github.sha }}
+
