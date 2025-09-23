@@ -18,7 +18,6 @@ if ! command -v pm2 &> /dev/null; then
     echo "📦 Installing PM2 globally..."
     npm install -g pm2
 fi
-
 # Create necessary directories
 echo "📁 Creating directories..."
 mkdir -p logs
